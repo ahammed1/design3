@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { bookings as initialBookings } from "../dashboard/data.js";
 import { FlightBookingContext } from "./flightBookingStore.js";
 
 export function FlightBookingProvider({ children }) {
@@ -14,7 +13,7 @@ export function FlightBookingProvider({ children }) {
     directOnly: false,
   });
   const [selectedFlightId, setSelectedFlightId] = useState("");
-  const [bookings, setBookings] = useState(initialBookings);
+  const [bookings, setBookings] = useState([]);
   const [createdBooking, setCreatedBooking] = useState(null);
 
   function updateSearch(values) {
@@ -41,7 +40,7 @@ export function FlightBookingProvider({ children }) {
       returnDate: search.tripType === "round-trip" ? search.returnDate : "",
       guests: Number(search.travellers),
       amount: flight.price * Number(search.travellers),
-      status: "Confirmed",
+      status: "Pending",
       paymentStatus: "Awaiting payment",
       paymentMethod: "Demo booking",
       createdAt: new Date().toISOString().slice(0, 10),

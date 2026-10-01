@@ -16,7 +16,8 @@ import {
   WalletCards,
   X,
 } from "lucide-react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, Navigate, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
+import { useAuth } from "../auth/authStore.js";
 import { useFlightBooking } from "../flights/flightBookingStore.js";
 import "./Dashboard.css";
 
@@ -45,14 +46,42 @@ function DashboardLayout() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
+  const [signOutError, setSignOutError] = useState("");
   const { bookings, setBookings } = useFlightBooking();
+  const { isAdmin, loading, signOut, user } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const displayName = user?.user_metadata?.full_name || user?.email || "Administrator";
+  const initials = displayName
+    .split(/[\s@.]+/)
+    .filter(Boolean)
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("");
   const pageTitle =
     routeTitles.find(([path]) => location.pathname.startsWith(path))?.[1] ??
     "Overview";
 
   function closeSidebar() {
     setSidebarOpen(false);
+  }
+
+  async function handleSignOut() {
+    setSignOutError("");
+    try {
+      await signOut();
+      navigate("/admin/sign-in", { replace: true });
+    } catch (error) {
+      setSignOutError(error.message || "Unable to sign out.");
+    }
+  }
+
+  if (loading) {
+    return <main className="dashboard-auth-status">Loading administrator session…</main>;
+  }
+
+  if (!isAdmin) {
+    return <Navigate to="/admin/sign-in" replace state={{ from: location.pathname }} />;
   }
 
   return (
@@ -78,10 +107,10 @@ function DashboardLayout() {
         </Link>
 
         <div className="sidebar-workspace">
-          <span className="workspace-avatar">L</span>
+          <span className="workspace-avatar">{initials || "A"}</span>
           <span className="workspace-copy">
-            <strong>Travel Management</strong>
-            <small>Workspace</small>
+            <strong>{displayName}</strong>
+            <small>Administrator</small>
           </span>
           <ChevronDown size={15} aria-hidden="true" />
         </div>
@@ -176,25 +205,23 @@ function DashboardLayout() {
                 onClick={() => setNotificationsOpen((open) => !open)}
               >
                 <Bell size={19} aria-hidden="true" />
-                <span className="notification-dot" />
               </button>
               {notificationsOpen && (
                 <div className="notification-popover">
-                  <div className="notification-popover-heading">
-                    <strong>Notifications</strong>
-                    <span>2 new</span>
-                  </div>
-                  <p><b>New booking</b> · Olivia Rhye booked a trip to Paris.</p>
-                  <p><b>Payment received</b> · Booking BK-2046 is paid.</p>
+                    <div className="notification-popover-heading">
+                      <strong>Notifications</strong>
+                      <span>0 new</span>
+                    </div>
+                    <p>No notifications yet. Updates will appear here when you receive them.</p>
                 </div>
               )}
             </div>
 
-            <button className="dashboard-user" type="button" aria-label="Alex Morgan profile">
-              <span className="user-avatar">AM</span>
+            <button className="dashboard-user" type="button" aria-label={`Sign out ${displayName}`} onClick={handleSignOut}>
+              <span className="user-avatar">{initials || "A"}</span>
               <span className="user-copy">
-                <strong>Alex Morgan</strong>
-                <small>Administrator</small>
+                <strong>{displayName}</strong>
+                <small>Sign out</small>
               </span>
               <ChevronDown size={15} aria-hidden="true" />
             </button>
@@ -202,6 +229,7 @@ function DashboardLayout() {
         </header>
 
         <main className="dashboard-page-content">
+          {signOutError && <p className="dashboard-auth-error" role="alert">{signOutError}</p>}
           <Outlet context={{ bookings, globalSearch, setBookings, setGlobalSearch }} />
           <footer className="dashboard-page-footer">
             <span>© 2026 Travel Management</span>

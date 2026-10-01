@@ -1,238 +1,3 @@
-export const bookings = [
-  {
-    id: "BK-2048",
-    guestId: "G-1001",
-    guest: "Olivia Rhye",
-    email: "olivia.rhye@email.com",
-    phone: "+1 (212) 555-0184",
-    initials: "OR",
-    color: "lilac",
-    route: "New York → Paris",
-    origin: "New York (JFK)",
-    destination: "Paris (CDG)",
-    date: "2026-10-18",
-    returnDate: "2026-10-27",
-    guests: 2,
-    amount: 1240,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Visa ending in 4242",
-    createdAt: "2026-09-18",
-    flightNumber: "LF 2048",
-  },
-  {
-    id: "BK-2047",
-    guestId: "G-1002",
-    guest: "Phoenix Baker",
-    email: "phoenix.baker@email.com",
-    phone: "+44 20 7946 0912",
-    initials: "PB",
-    color: "peach",
-    route: "London → Tokyo",
-    origin: "London (LHR)",
-    destination: "Tokyo (HND)",
-    date: "2026-10-20",
-    returnDate: "2026-10-29",
-    guests: 1,
-    amount: 2180,
-    status: "Pending",
-    paymentStatus: "Awaiting payment",
-    paymentMethod: "Mastercard ending in 2088",
-    createdAt: "2026-09-20",
-    flightNumber: "LF 2047",
-  },
-  {
-    id: "BK-2046",
-    guestId: "G-1003",
-    guest: "Lana Steiner",
-    email: "lana.steiner@email.com",
-    phone: "+65 6123 4567",
-    initials: "LS",
-    color: "mint",
-    route: "Singapore → Bali",
-    origin: "Singapore (SIN)",
-    destination: "Denpasar (DPS)",
-    date: "2026-10-22",
-    returnDate: "2026-10-29",
-    guests: 3,
-    amount: 960,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Visa ending in 6104",
-    createdAt: "2026-09-22",
-    flightNumber: "LF 2046",
-  },
-  {
-    id: "BK-2045",
-    guestId: "G-1004",
-    guest: "Demi Wilkinson",
-    email: "demi.wilkinson@email.com",
-    phone: "+1 (416) 555-0136",
-    initials: "DW",
-    color: "blue",
-    route: "Toronto → Lisbon",
-    origin: "Toronto (YYZ)",
-    destination: "Lisbon (LIS)",
-    date: "2026-10-24",
-    returnDate: "2026-11-02",
-    guests: 2,
-    amount: 1485,
-    status: "Cancelled",
-    paymentStatus: "Refunded",
-    paymentMethod: "Amex ending in 1009",
-    createdAt: "2026-09-24",
-    flightNumber: "LF 2045",
-  },
-  {
-    id: "BK-2044",
-    guestId: "G-1005",
-    guest: "Candice Wu",
-    email: "candice.wu@email.com",
-    phone: "+1 (415) 555-0177",
-    initials: "CW",
-    color: "rose",
-    route: "San Francisco → Seoul",
-    origin: "San Francisco (SFO)",
-    destination: "Seoul (ICN)",
-    date: "2026-10-27",
-    returnDate: "2026-11-05",
-    guests: 4,
-    amount: 3240,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Visa ending in 7319",
-    createdAt: "2026-09-25",
-    flightNumber: "LF 2044",
-  },
-  {
-    id: "BK-2043",
-    guestId: "G-1006",
-    guest: "Natali Craig",
-    email: "natali.craig@email.com",
-    phone: "+971 4 555 0180",
-    initials: "NC",
-    color: "gold",
-    route: "Dubai → Rome",
-    origin: "Dubai (DXB)",
-    destination: "Rome (FCO)",
-    date: "2026-10-29",
-    returnDate: "2026-11-04",
-    guests: 2,
-    amount: 1870,
-    status: "Pending",
-    paymentStatus: "Awaiting payment",
-    paymentMethod: "Mastercard ending in 1142",
-    createdAt: "2026-09-26",
-    flightNumber: "LF 2043",
-  },
-  {
-    id: "BK-2042",
-    guestId: "G-1001",
-    guest: "Olivia Rhye",
-    email: "olivia.rhye@email.com",
-    phone: "+1 (212) 555-0184",
-    initials: "OR",
-    color: "lilac",
-    route: "Paris → Rome",
-    origin: "Paris (CDG)",
-    destination: "Rome (FCO)",
-    date: "2026-11-03",
-    returnDate: "2026-11-10",
-    guests: 2,
-    amount: 890,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Visa ending in 4242",
-    createdAt: "2026-09-27",
-    flightNumber: "LF 2042",
-  },
-  {
-    id: "BK-2041",
-    guestId: "G-1007",
-    guest: "Amelia Thompson",
-    email: "amelia.thompson@email.com",
-    phone: "+44 7700 900421",
-    initials: "AT",
-    color: "peach",
-    route: "London → New York",
-    origin: "London (LHR)",
-    destination: "New York (JFK)",
-    date: "2026-10-02",
-    returnDate: "2026-10-09",
-    guests: 1,
-    amount: 1640,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Visa ending in 0382",
-    createdAt: "2026-09-28",
-    flightNumber: "LF 2041",
-  },
-  {
-    id: "BK-2040",
-    guestId: "G-1008",
-    guest: "Ethan Chen",
-    email: "ethan.chen@email.com",
-    phone: "+65 8123 9201",
-    initials: "EC",
-    color: "blue",
-    route: "Singapore → Tokyo",
-    origin: "Singapore (SIN)",
-    destination: "Tokyo (HND)",
-    date: "2026-10-03",
-    returnDate: "2026-10-11",
-    guests: 2,
-    amount: 2760,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Amex ending in 5050",
-    createdAt: "2026-09-29",
-    flightNumber: "LF 2040",
-  },
-  {
-    id: "BK-2039",
-    guestId: "G-1009",
-    guest: "Sofia Martinez",
-    email: "sofia.martinez@email.com",
-    phone: "+34 600 123 765",
-    initials: "SM",
-    color: "mint",
-    route: "Madrid → Rome",
-    origin: "Madrid (MAD)",
-    destination: "Rome (FCO)",
-    date: "2026-10-04",
-    returnDate: "2026-10-10",
-    guests: 3,
-    amount: 1320,
-    status: "Confirmed",
-    paymentStatus: "Paid",
-    paymentMethod: "Mastercard ending in 6620",
-    createdAt: "2026-09-30",
-    flightNumber: "LF 2039",
-  },
-];
-
-export const monthlyStats = [
-  { month: "Jan", bookings: 44, revenue: 28400 },
-  { month: "Feb", bookings: 58, revenue: 35200 },
-  { month: "Mar", bookings: 49, revenue: 31800 },
-  { month: "Apr", bookings: 73, revenue: 42100 },
-  { month: "May", bookings: 63, revenue: 39700 },
-  { month: "Jun", bookings: 86, revenue: 51800 },
-  { month: "Jul", bookings: 68, revenue: 43600 },
-  { month: "Aug", bookings: 94, revenue: 58400 },
-  { month: "Sep", bookings: 79, revenue: 49200 },
-  { month: "Oct", bookings: 100, revenue: 64200 },
-  { month: "Nov", bookings: 82, revenue: 53600 },
-  { month: "Dec", bookings: 91, revenue: 58700 },
-];
-
-export const dashboardMetrics = {
-  totalBookings: 1284,
-  revenue: 284520,
-  pendingBookings: 18,
-  activeGuests: 842,
-};
-
 export function formatDate(date) {
   if (!date) return "—";
   return new Intl.DateTimeFormat("en-US", {
@@ -240,4 +5,58 @@ export function formatDate(date) {
     day: "numeric",
     year: "numeric",
   }).format(new Date(`${date}T12:00:00`));
+}
+
+export function formatCurrency(amount) {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    maximumFractionDigits: 0,
+  }).format(amount);
+}
+
+export function getDashboardMetrics(bookings) {
+  const paidBookings = bookings.filter((booking) => booking.paymentStatus === "Paid");
+  return {
+    totalBookings: bookings.length,
+    revenue: paidBookings.reduce((total, booking) => total + booking.amount, 0),
+    pendingBookings: bookings.filter((booking) => booking.status === "Pending").length,
+    activeGuests: new Set(bookings.map((booking) => booking.guestId)).size,
+    averageBooking: paidBookings.length
+      ? Math.round(paidBookings.reduce((total, booking) => total + booking.amount, 0) / paidBookings.length)
+      : 0,
+  };
+}
+
+export function getMonthlyStats(bookings) {
+  const months = new Map();
+  bookings.forEach((booking) => {
+    if (!booking.date) return;
+    const date = new Date(`${booking.date}T12:00:00`);
+    const key = `${date.getFullYear()}-${date.getMonth()}`;
+    const current = months.get(key) ?? {
+      month: new Intl.DateTimeFormat("en-US", { month: "short" }).format(date),
+      bookings: 0,
+      revenue: 0,
+    };
+    current.bookings += 1;
+    if (booking.paymentStatus === "Paid") current.revenue += booking.amount;
+    months.set(key, current);
+  });
+  return [...months.entries()]
+    .sort(([left], [right]) => left - right)
+    .map(([, value]) => value);
+}
+
+export function getPopularDestinations(bookings) {
+  const counts = new Map();
+  bookings.forEach((booking) => {
+    const destination = booking.destination?.split(" (")[0] || booking.route?.split(" → ")[1];
+    if (destination) counts.set(destination, (counts.get(destination) ?? 0) + 1);
+  });
+  const maximum = Math.max(1, ...counts.values());
+  return [...counts.entries()]
+    .map(([name, count]) => ({ name, bookings: count, share: Math.round((count / maximum) * 100) }))
+    .sort((left, right) => right.bookings - left.bookings)
+    .slice(0, 5);
 }

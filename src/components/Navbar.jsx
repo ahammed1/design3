@@ -7,7 +7,9 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "Flights", href: "#booking" },
   { label: "Flight Search", to: "/flights/search" },
+  { label: "Admin", to: "/admin/sign-in" },
   { label: "Destinations", href: "#destinations" },
+  { label: "Stay & Go", href: "#travel-services" },
   { label: "About", href: "#about" },
 ];
 

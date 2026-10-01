@@ -1,21 +1,30 @@
 import {
   ArrowDown,
   ArrowLeftRight,
+  ArrowRight,
   ArrowUpRight,
+  BadgeCheck,
+  BusFront,
+  CarFront,
   CalendarDays,
+  Headphones,
+  Hotel,
   MapPin,
   Plane,
   PlaneTakeoff,
   Plus,
+  ShieldCheck,
   Search,
-  Star,
+  TicketCheck,
   Users,
   UserRound,
   X,
 } from "lucide-react";
 import { useState } from "react";
-import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
+import AuthPage from "./auth/AuthPage.jsx";
+import { AuthProvider } from "./auth/AuthProvider.jsx";
 import BookingConfirmation from "./flights/BookingConfirmation.jsx";
 import FlightDetails from "./flights/FlightDetails.jsx";
 import FlightResults from "./flights/FlightResults.jsx";
@@ -108,9 +117,80 @@ const footerPhotos = [
   },
 ];
 
+const homepageDeals = [
+  {
+    origin: "Bengaluru (BLR)",
+    destination: "Dubai (DXB)",
+    city: "Dubai",
+    country: "United Arab Emirates",
+    price: 228,
+    image:
+      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    origin: "New York (JFK)",
+    destination: "Paris (CDG)",
+    city: "Paris",
+    country: "France",
+    price: 398,
+    image:
+      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    origin: "Singapore (SIN)",
+    destination: "Tokyo (HND)",
+    city: "Tokyo",
+    country: "Japan",
+    price: 318,
+    image:
+      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    origin: "Delhi (DEL)",
+    destination: "London (LHR)",
+    city: "London",
+    country: "United Kingdom",
+    price: 486,
+    image:
+      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const homepageFaqs = [
+  {
+    question: "How do I compare the available flights?",
+    answer:
+      "Enter your route and travel dates in the search form. On the results page, filter by stops, airline, price, departure or arrival time, and duration, then sort by best, cheapest, or fastest.",
+  },
+  {
+    question: "Can I choose a direct flight?",
+    answer:
+      "Yes. Turn on Direct flights only in the search form, or use the stops filter on the results page to show nonstop options.",
+  },
+  {
+    question: "What is included in the displayed fare?",
+    answer:
+      "Each sample flight includes fare and baggage information in its details. The prices on this demo site are illustrative and are not live quotes.",
+  },
+  {
+    question: "Can I change passenger information after booking?",
+    answer:
+      "This frontend demo records the details you submit and displays them in the confirmation and dashboard. Changes are not sent to an airline or booking provider.",
+  },
+];
+
 const airports = [
   { value: "Bengaluru (BLR)", label: "Kempegowda International Airport" },
+  { value: "Chennai (MAA)", label: "Chennai International Airport" },
+  { value: "Kochi (COK)", label: "Cochin International Airport" },
+  { value: "Kolkata (CCU)", label: "Netaji Subhas Chandra Bose International Airport" },
+  { value: "Hyderabad (HYD)", label: "Rajiv Gandhi International Airport" },
+  { value: "Ahmedabad (AMD)", label: "Sardar Vallabhbhai Patel International Airport" },
   { value: "Dubai (DXB)", label: "Dubai International Airport" },
+  { value: "Doha (DOH)", label: "Hamad International Airport" },
+  { value: "Bangkok (BKK)", label: "Suvarnabhumi Airport" },
+  { value: "Rome (FCO)", label: "Leonardo da Vinci–Fiumicino Airport" },
+  { value: "Istanbul (IST)", label: "Istanbul Airport" },
   { value: "London (LHR)", label: "Heathrow Airport" },
   { value: "New York (JFK)", label: "John F. Kennedy International Airport" },
   { value: "Paris (CDG)", label: "Charles de Gaulle Airport" },
@@ -181,6 +261,23 @@ function BookingWebsite() {
       directOnly: false,
     });
     setSearchMessage("");
+    navigate("/flights/results");
+  }
+
+  function searchHomepageDeal(deal) {
+    const departure = new Date();
+    departure.setDate(departure.getDate() + 14);
+    departure.setMinutes(departure.getMinutes() - departure.getTimezoneOffset());
+    updateSearch({
+      tripType: "one-way",
+      origin: deal.origin,
+      destination: deal.destination,
+      departureDate: departure.toISOString().slice(0, 10),
+      returnDate: "",
+      travellers: 1,
+      cabinClass: "Economy",
+      directOnly: false,
+    });
     navigate("/flights/results");
   }
 
@@ -507,6 +604,64 @@ function BookingWebsite() {
             </form>
           </section>
 
+          <section className="homepage-benefits" aria-labelledby="homepage-benefits-title">
+            <div className="homepage-section-heading">
+              <p className="booking-eyebrow">TRAVEL, MADE CLEARER</p>
+              <h2 id="homepage-benefits-title">The details that make planning easier.</h2>
+              <p>Helpful options and clear information, from your first search to takeoff.</p>
+            </div>
+            <div className="homepage-benefit-grid">
+              <article className="homepage-benefit-card">
+                <span className="homepage-benefit-icon benefit-icon-lilac"><TicketCheck size={20} aria-hidden="true" /></span>
+                <h3>Compare in one place</h3>
+                <p>Review schedules, stops, airlines, and fares together to find the trip that suits you.</p>
+              </article>
+              <article className="homepage-benefit-card">
+                <span className="homepage-benefit-icon benefit-icon-green"><BadgeCheck size={20} aria-hidden="true" /></span>
+                <h3>Know what your fare includes</h3>
+                <p>Check baggage and fare details before continuing with your flight selection.</p>
+              </article>
+              <article className="homepage-benefit-card">
+                <span className="homepage-benefit-icon benefit-icon-blue"><ShieldCheck size={20} aria-hidden="true" /></span>
+                <h3>Simple booking steps</h3>
+                <p>Follow a clear path from flight details to passenger information and confirmation.</p>
+              </article>
+              <article className="homepage-benefit-card">
+                <span className="homepage-benefit-icon benefit-icon-amber"><Headphones size={20} aria-hidden="true" /></span>
+                <h3>Support when you need it</h3>
+                <p>Our team can help with questions as you plan your next journey.</p>
+              </article>
+            </div>
+          </section>
+
+          <section className="homepage-deals" aria-labelledby="homepage-deals-title">
+            <div className="homepage-section-heading homepage-section-heading-row">
+              <div>
+                <p className="booking-eyebrow">A LITTLE INSPIRATION</p>
+                <h2 id="homepage-deals-title">Sample fares to get you going.</h2>
+                <p>Explore a few popular routes and compare the available flights.</p>
+              </div>
+              <button className="homepage-text-link" type="button" onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}>
+                Build your own search <ArrowUpRight size={15} aria-hidden="true" />
+              </button>
+            </div>
+            <div className="homepage-deal-grid">
+              {homepageDeals.map((deal) => (
+                <article className="homepage-deal-card" key={`${deal.origin}-${deal.destination}`}>
+                  <div className="homepage-deal-image" style={{ backgroundImage: `linear-gradient(180deg, transparent 42%, rgba(12, 18, 26, 0.62)), url(${deal.image})` }}>
+                    <span>{deal.country}</span>
+                  </div>
+                  <div className="homepage-deal-info">
+                    <div><h3>{deal.city}</h3><p>{deal.origin.split(" (")[0]} <ArrowRight size={13} aria-hidden="true" /> {deal.city}</p></div>
+                    <div className="homepage-deal-price"><small>Sample one-way fares from</small><strong>${deal.price}</strong></div>
+                  </div>
+                  <button type="button" onClick={() => searchHomepageDeal(deal)}>Explore flights <ArrowRight size={14} aria-hidden="true" /></button>
+                </article>
+              ))}
+            </div>
+            <p className="homepage-deals-note">Sample prices are for demonstration and may not reflect live fares.</p>
+          </section>
+
           <section className="destination-grid" id="destinations">
             {destinations.map((destination, index) => (
               <a
@@ -528,11 +683,7 @@ function BookingWebsite() {
                   </div>
 
                   <div className="card-info">
-                    <div className="stars" aria-label="5 star rating">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} size={10} fill="currentColor" strokeWidth={1.5} />
-                      ))}
-                    </div>
+                    <span className="destination-rating-empty">No ratings yet</span>
                     <h3>{destination.city}</h3>
                     <p>{destination.text}</p>
                   </div>
@@ -541,22 +692,99 @@ function BookingWebsite() {
             ))}
           </section>
 
+          <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
+            <div className="homepage-section-heading homepage-section-heading-row">
+              <div>
+                <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
+                <h2 id="travel-services-title">Make the whole trip yours.</h2>
+                <p>We’re working on a few more ways to make travel planning easier.</p>
+              </div>
+              <Link className="homepage-text-link" to="/flights/search">
+                Search flights <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="homepage-service-grid">
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80)" }}
+                >
+                  <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Coming soon</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Find a place to stay</h3>
+                  <p>Discover welcoming hotels and stays to make every stop feel like part of the adventure.</p>
+                </div>
+              </article>
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80)" }}
+                >
+                  <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Coming soon</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Get around your way</h3>
+                  <p>Plan ahead with car rental options for city drives, scenic routes, and everything between.</p>
+                </div>
+              </article>
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80)" }}
+                >
+                  <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Coming soon</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Arrive with ease</h3>
+                  <p>Airport transfers and local rides will help connect the little details of your journey.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
           <section className="stats" id="about">
             <div className="stat-item">
-              <strong>50,000+</strong>
+              <strong>0</strong>
               <span>Happy travelers</span>
             </div>
             <div className="stat-item">
-              <strong>4.9/5</strong>
+              <strong>0.0/5</strong>
               <span>Average guest rating</span>
             </div>
             <div className="stat-item">
-              <strong>1,200+</strong>
+              <strong>0</strong>
               <span>Destinations to discover</span>
             </div>
             <div className="stat-item">
-              <strong>50+</strong>
+              <strong>0</strong>
               <span>Countries served</span>
+            </div>
+          </section>
+
+          <section className="homepage-testimonials" aria-labelledby="homepage-testimonials-title">
+            <div className="homepage-section-heading">
+              <p className="booking-eyebrow">NOTES FROM THE JOURNEY</p>
+              <h2 id="homepage-testimonials-title">Traveler reviews</h2>
+            </div>
+            <p className="homepage-no-reviews">No reviews or ratings yet. Check back after our first trips.</p>
+          </section>
+
+          <section className="homepage-faq" aria-labelledby="homepage-faq-title">
+            <div className="homepage-section-heading">
+              <p className="booking-eyebrow">GOOD TO KNOW</p>
+              <h2 id="homepage-faq-title">A few helpful answers.</h2>
+            </div>
+            <div className="homepage-faq-list">
+              {homepageFaqs.map((faq) => (
+                <details className="homepage-faq-item" key={faq.question}>
+                  <summary>{faq.question}</summary>
+                  <p>{faq.answer}</p>
+                </details>
+              ))}
             </div>
           </section>
         </main>
@@ -620,7 +848,8 @@ function BookingWebsite() {
             <nav className="footer-column" aria-label="Travel help">
               <h3>Travel help</h3>
               <a href="#booking">Booking options</a>
-              <a href="#booking">Hotels and car rentals</a>
+              <a href="#travel-services">Hotels and car rentals</a>
+              <a href="#travel-services">Airport transfers</a>
               <a href="#home">Back to top</a>
             </nav>
           </div>
@@ -639,28 +868,32 @@ function BookingWebsite() {
 
 function App() {
   return (
-    <FlightBookingProvider>
-      <Routes>
-        <Route path="/" element={<BookingWebsite />} />
-        <Route path="/flights/search" element={<FlightSearch />} />
-        <Route path="/flights/results" element={<FlightResults />} />
-        <Route path="/flights/details/:flightId" element={<FlightDetails />} />
-        <Route path="/flights/passengers" element={<PassengerDetails />} />
-        <Route path="/flights/confirmation/:bookingId" element={<BookingConfirmation />} />
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Navigate to="overview" replace />} />
-          <Route path="overview" element={<Dashboard />} />
-          <Route path="bookings" element={<Bookings />} />
-          <Route path="bookings/:bookingId" element={<BookingDetails />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="upcoming" element={<UpcomingTrips />} />
-          <Route path="guests" element={<Guests />} />
-          <Route path="guests/:guestId" element={<Guests />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </FlightBookingProvider>
+    <AuthProvider>
+      <FlightBookingProvider>
+        <Routes>
+          <Route path="/" element={<BookingWebsite />} />
+          <Route path="/admin/setup" element={<AuthPage />} />
+          <Route path="/admin/sign-in" element={<AuthPage />} />
+          <Route path="/flights/search" element={<FlightSearch />} />
+          <Route path="/flights/results" element={<FlightResults />} />
+          <Route path="/flights/details/:flightId" element={<FlightDetails />} />
+          <Route path="/flights/passengers" element={<PassengerDetails />} />
+          <Route path="/flights/confirmation/:bookingId" element={<BookingConfirmation />} />
+          <Route path="/dashboard" element={<DashboardLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<Dashboard />} />
+            <Route path="bookings" element={<Bookings />} />
+            <Route path="bookings/:bookingId" element={<BookingDetails />} />
+            <Route path="analytics" element={<Analytics />} />
+            <Route path="upcoming" element={<UpcomingTrips />} />
+            <Route path="guests" element={<Guests />} />
+            <Route path="guests/:guestId" element={<Guests />} />
+            <Route path="settings" element={<Settings />} />
+          </Route>
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </FlightBookingProvider>
+    </AuthProvider>
   );
 }
 

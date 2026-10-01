@@ -434,6 +434,28 @@
   padding: 31px clamp(20px, 3vw, 42px) 24px;
 }
 
+.dashboard-auth-status {
+  display: grid;
+  min-height: 100vh;
+  place-items: center;
+  color: #737b8d;
+  font: 0.85rem Inter, "Segoe UI", Arial, sans-serif;
+}
+
+.dashboard-auth-error {
+  margin-bottom: 14px;
+  color: #b65761;
+  font-size: 0.75rem;
+}
+
+.dashboard-empty-state {
+  padding: 30px 15px;
+  color: #8b91a0;
+  font-size: 0.72rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
 .dashboard-page-heading {
   display: flex;
   align-items: flex-end;

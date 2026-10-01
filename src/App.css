@@ -675,6 +675,13 @@ img {
   font-weight: 600;
 }
 
+.destination-rating-empty {
+  display: block;
+  margin-bottom: 10px;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.62rem;
+}
+
 .card-info p {
   font-size: 0.72rem;
   line-height: 1.5;
@@ -1198,5 +1205,436 @@ img {
 
   .footer-photo img {
     transition: none;
+  }
+}
+
+.homepage-benefits,
+.homepage-deals,
+.homepage-testimonials,
+.homepage-faq {
+  padding: 52px clamp(4px, 1.4vw, 18px);
+}
+
+.homepage-section-heading {
+  max-width: 650px;
+  margin: 0 auto 24px;
+  text-align: center;
+}
+
+.homepage-section-heading h2 {
+  margin-top: 9px;
+  color: #171d25;
+  font-size: clamp(1.55rem, 3.4vw, 2.35rem);
+  font-weight: 500;
+  letter-spacing: -0.055em;
+}
+
+.homepage-section-heading > p:last-child {
+  margin-top: 9px;
+  color: #737c86;
+  font-size: 0.82rem;
+  line-height: 1.6;
+}
+
+.homepage-benefit-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 13px;
+}
+
+.homepage-benefit-card {
+  min-width: 0;
+  padding: 19px 17px;
+  border: 1px solid #e9ecef;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.72);
+}
+
+.homepage-benefit-icon {
+  display: inline-flex;
+  width: 38px;
+  height: 38px;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+  border-radius: 11px;
+}
+
+.benefit-icon-lilac {
+  background: #f0edff;
+  color: #685bc9;
+}
+
+.benefit-icon-green {
+  background: #eaf7f0;
+  color: #398a68;
+}
+
+.benefit-icon-blue {
+  background: #eaf4ff;
+  color: #4d80b1;
+}
+
+.benefit-icon-amber {
+  background: #fff4e4;
+  color: #bf8740;
+}
+
+.homepage-benefit-card h3 {
+  color: #242b34;
+  font-size: 0.83rem;
+  font-weight: 650;
+}
+
+.homepage-benefit-card p {
+  margin-top: 8px;
+  color: #78818b;
+  font-size: 0.72rem;
+  line-height: 1.6;
+}
+
+.homepage-deals {
+  padding-top: 38px;
+  background: rgba(245, 247, 249, 0.68);
+}
+
+.homepage-section-heading-row {
+  display: flex;
+  max-width: none;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 18px;
+  text-align: left;
+}
+
+.homepage-section-heading-row > div {
+  max-width: 620px;
+}
+
+.homepage-text-link {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 0;
+  border: 0;
+  background: transparent;
+  color: #3e6378;
+  font-size: 0.74rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.homepage-deal-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.homepage-deal-card {
+  overflow: hidden;
+  border: 1px solid #e7eaee;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(22, 30, 39, 0.04);
+}
+
+.homepage-deal-image {
+  display: flex;
+  min-height: 145px;
+  align-items: flex-end;
+  padding: 12px;
+  background-color: #dce2e5;
+  background-position: center;
+  background-size: cover;
+}
+
+.homepage-deal-image > span {
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 99px;
+  background: rgba(15, 21, 27, 0.28);
+  color: #fff;
+  font-size: 0.61rem;
+  backdrop-filter: blur(8px);
+}
+
+.homepage-deal-info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 13px 10px;
+}
+
+.homepage-deal-info h3 {
+  color: #242b34;
+  font-size: 0.88rem;
+}
+
+.homepage-deal-info > div:first-child p {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 6px;
+  color: #818993;
+  font-size: 0.61rem;
+  white-space: nowrap;
+}
+
+.homepage-deal-price {
+  display: grid;
+  justify-items: end;
+  gap: 3px;
+  text-align: right;
+}
+
+.homepage-deal-price small {
+  color: #8b939c;
+  font-size: 0.52rem;
+  white-space: nowrap;
+}
+
+.homepage-deal-price strong {
+  color: #202832;
+  font-size: 1.02rem;
+}
+
+.homepage-deal-card > button {
+  display: flex;
+  width: calc(100% - 26px);
+  min-height: 35px;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 13px 13px;
+  padding: 0 10px;
+  border: 1px solid #e6e9ed;
+  border-radius: 8px;
+  background: #fff;
+  color: #3d6175;
+  font-size: 0.67rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: border-color 0.18s ease, background 0.18s ease;
+}
+
+.homepage-deal-card > button:hover {
+  border-color: #bdcdd7;
+  background: #f7fafb;
+}
+
+.homepage-deals-note {
+  margin-top: 13px;
+  color: #9299a2;
+  font-size: 0.64rem;
+  text-align: right;
+}
+
+.homepage-testimonials {
+  padding-top: 50px;
+}
+
+.homepage-no-reviews {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 22px;
+  border: 1px dashed #dfe3e7;
+  border-radius: 12px;
+  color: #7b848e;
+  font-size: 0.76rem;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.homepage-faq {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.3fr);
+  align-items: start;
+  gap: 30px;
+  padding-top: 24px;
+  padding-bottom: 52px;
+}
+
+.homepage-faq .homepage-section-heading {
+  margin: 0;
+  text-align: left;
+}
+
+.homepage-faq-list {
+  border-top: 1px solid #e5e8ec;
+}
+
+.homepage-faq-item {
+  border-bottom: 1px solid #e5e8ec;
+}
+
+.homepage-faq-item summary {
+  position: relative;
+  padding: 16px 30px 16px 0;
+  color: #303842;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.homepage-faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.homepage-faq-item summary::after {
+  position: absolute;
+  top: 15px;
+  right: 5px;
+  color: #66717b;
+  font-size: 1rem;
+  content: "+";
+}
+
+.homepage-faq-item[open] summary::after {
+  content: "−";
+}
+
+.homepage-faq-item > p {
+  max-width: 650px;
+  padding: 0 20px 16px 0;
+  color: #747e88;
+  font-size: 0.71rem;
+  line-height: 1.7;
+}
+
+.homepage-travel-services {
+  padding: 42px clamp(4px, 1.4vw, 18px) 32px;
+  background: rgba(245, 247, 249, 0.68);
+}
+
+.homepage-service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 15px;
+}
+
+.homepage-service-card {
+  overflow: hidden;
+  border: 1px solid #e7eaee;
+  border-radius: 15px;
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(22, 30, 39, 0.04);
+}
+
+.homepage-service-image {
+  position: relative;
+  display: flex;
+  min-height: 175px;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 13px;
+  background-color: #dce2e5;
+  background-position: center;
+  background-size: cover;
+}
+
+.homepage-service-icon {
+  display: inline-flex;
+  width: 36px;
+  height: 36px;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #334957;
+  backdrop-filter: blur(8px);
+}
+
+.homepage-service-status {
+  padding: 6px 9px;
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 99px;
+  background: rgba(15, 21, 27, 0.35);
+  color: #fff;
+  font-size: 0.59rem;
+  font-weight: 600;
+  backdrop-filter: blur(8px);
+}
+
+.homepage-service-copy {
+  padding: 15px 16px 18px;
+}
+
+.homepage-service-copy h3 {
+  color: #252c35;
+  font-size: 0.86rem;
+  font-weight: 650;
+}
+
+.homepage-service-copy p {
+  margin-top: 7px;
+  color: #77818a;
+  font-size: 0.71rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+  .homepage-benefit-grid,
+  .homepage-deal-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 760px) {
+  .homepage-benefits,
+  .homepage-deals,
+  .homepage-testimonials,
+  .homepage-faq {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  .homepage-faq {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+  }
+
+  .homepage-service-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .homepage-benefits,
+  .homepage-deals,
+  .homepage-testimonials,
+  .homepage-travel-services {
+    padding-top: 34px;
+    padding-bottom: 34px;
+  }
+
+  .homepage-benefit-grid,
+  .homepage-deal-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homepage-service-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .homepage-section-heading-row {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .homepage-deal-image {
+    min-height: 165px;
+  }
+
+  .homepage-deals-note {
+    text-align: left;
+  }
+
+  .homepage-faq {
+    padding-top: 18px;
+    padding-bottom: 38px;
   }
 }

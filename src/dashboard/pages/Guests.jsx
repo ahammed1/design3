@@ -22,7 +22,7 @@ function createGuestList(bookings) {
   return [...guestsById.values()].map((guest) => ({
     ...guest,
     totalSpent: guest.bookings
-      .filter((booking) => booking.status !== "Cancelled")
+      .filter((booking) => booking.paymentStatus === "Paid")
       .reduce((total, booking) => total + booking.amount, 0),
     lastBooking: guest.bookings.slice().sort((a, b) => b.createdAt.localeCompare(a.createdAt))[0],
   }));

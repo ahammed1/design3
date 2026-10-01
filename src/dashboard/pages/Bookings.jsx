@@ -82,7 +82,7 @@ function Bookings() {
                 </tr>
               ))}
               {filteredBookings.length === 0 && (
-                <tr><td className="booking-table-empty" colSpan={8}>No bookings match these filters.</td></tr>
+                <tr><td className="booking-table-empty" colSpan={8}>{bookings.length === 0 ? "No bookings yet. Confirmed reservations will appear here." : "No bookings match these filters."}</td></tr>
               )}
             </tbody>
           </table>
