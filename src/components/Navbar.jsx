@@ -1,10 +1,12 @@
 import { useState } from "react";
 import { Menu, PlaneTakeoff, X } from "lucide-react";
+import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const navItems = [
   { label: "Home", href: "#home" },
   { label: "Flights", href: "#booking" },
+  { label: "Flight Search", to: "/flights/search" },
   { label: "Destinations", href: "#destinations" },
   { label: "About", href: "#about" },
 ];
@@ -18,11 +20,11 @@ function Navbar() {
 
   return (
     <header className="navbar">
-      <a className="navbar-brand" href="#home" onClick={closeMenu} aria-label="LuxFly home">
+      <a className="navbar-brand" href="#home" onClick={closeMenu} aria-label="xxxxxx home">
         <span className="navbar-brand-icon">
           <PlaneTakeoff size={18} aria-hidden="true" />
         </span>
-        <span>LuxFly</span>
+        <span>xxxxxx</span>
       </a>
 
       <button
@@ -42,10 +44,10 @@ function Navbar() {
         aria-label="Main navigation"
       >
         <div className="navbar-links">
-          {navItems.map((item) => (
-            <a key={item.href} href={item.href} onClick={closeMenu}>
-              {item.label}
-            </a>
+          {navItems.map((item) => item.to ? (
+            <Link key={item.to} to={item.to} onClick={closeMenu}>{item.label}</Link>
+          ) : (
+            <a key={item.href} href={item.href} onClick={closeMenu}>{item.label}</a>
           ))}
         </div>
         <a className="navbar-cta" href="#booking" onClick={closeMenu}>
