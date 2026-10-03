@@ -311,30 +311,6 @@ const defaultTripPlanner = {
   budget: "Flexible",
 };
 
-const travelGuides = [
-  {
-    title: "5 days in Bali",
-    destination: "Bali, Indonesia",
-    description: "Balance temple visits, island scenery, local food, and time to slow down.",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
-    guide: "Begin with a few nights near Ubud for temples, green landscapes, and local craft. Leave room for a coast-side stay, a relaxed beach day, and an evening discovering Balinese food. Travel times vary, so avoid packing every stop into one day.",
-  },
-  {
-    title: "A weekend escape to Dubai",
-    destination: "Dubai, United Arab Emirates",
-    description: "Pair city landmarks with an unhurried desert evening.",
-    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
-    guide: "Choose a central base to make a short stay easier. Set aside time for one neighbourhood or landmark each day, and consider a desert experience in the evening. Check transfer times and activity inclusions before confirming plans.",
-  },
-  {
-    title: "A first-time guide to Switzerland",
-    destination: "Switzerland",
-    description: "Plan scenic rail journeys, mountain days, and relaxed lakeside stops.",
-    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80",
-    guide: "Choose fewer bases and connect them by rail to keep the itinerary comfortable. Check seasonal access for mountain excursions, allow time for weather changes, and compare transport passes with the routes you expect to take.",
-  },
-];
-
 const travelExperiences = [
   {
     name: "Desert safari",
@@ -778,30 +754,6 @@ function BookingWebsite() {
                     <h3>{experience.name}</h3>
                     <p>{experience.description}</p>
                     <a href="#travel-interests">Explore <ArrowRight size={14} aria-hidden="true" /></a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="home-extra-section home-travel-guides" id="travel-guides" aria-labelledby="home-travel-guides-title">
-            <div className="home-extra-heading">
-              <p className="booking-eyebrow">NOTES FOR THE ROAD</p>
-              <h2 id="home-travel-guides-title">A little inspiration for the journey.</h2>
-              <p>Practical ideas to help you imagine a trip before you go.</p>
-            </div>
-            <div className="home-travel-guide-grid">
-              {travelGuides.map((guide) => (
-                <article className="home-travel-guide-card" key={guide.title}>
-                  <img src={guide.image} alt={`${guide.destination} travel inspiration`} />
-                  <div>
-                    <span>{guide.destination}</span>
-                    <h3>{guide.title}</h3>
-                    <p>{guide.description}</p>
-                    <details>
-                      <summary>Read guide <ArrowRight size={14} aria-hidden="true" /></summary>
-                      <p>{guide.guide}</p>
-                    </details>
                   </div>
                 </article>
               ))}

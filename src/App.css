@@ -3758,8 +3758,7 @@ img {
 
 .home-package-footer > button:focus-visible,
 .home-trip-planner-suggestion > button:focus-visible,
-.home-trip-planner-empty button:focus-visible,
-.home-travel-guide-card summary:focus-visible {
+.home-trip-planner-empty button:focus-visible {
   outline: 3px solid rgba(80, 119, 143, 0.38);
   outline-offset: 2px;
 }
@@ -3914,90 +3913,6 @@ img {
   line-height: 1.55;
 }
 
-.home-travel-guide-grid {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 15px;
-}
-
-.home-travel-guide-card {
-  display: flex;
-  min-width: 0;
-  height: 100%;
-  flex-direction: column;
-  overflow: hidden;
-  border: 1px solid #e7eaee;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 5px 15px rgba(22, 30, 39, 0.04);
-}
-
-.home-travel-guide-card > img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-}
-
-.home-travel-guide-card > div {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 15px;
-}
-
-.home-travel-guide-card > div > span {
-  color: #71828b;
-  font-size: 0.61rem;
-  font-weight: 600;
-}
-
-.home-travel-guide-card h3 {
-  margin-top: 6px;
-  color: #28343c;
-  font-size: 0.85rem;
-  font-weight: 650;
-  line-height: 1.35;
-  min-height: 2.3em;
-}
-
-.home-travel-guide-card > div > p {
-  min-height: 54px;
-  margin-top: 7px;
-  color: #78818b;
-  font-size: 0.68rem;
-  line-height: 1.6;
-}
-
-.home-travel-guide-card details {
-  margin-top: auto;
-  padding-top: 11px;
-  border-top: 1px solid #edf0f1;
-}
-
-.home-travel-guide-card summary {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  color: #3d6175;
-  font-size: 0.68rem;
-  font-weight: 650;
-  cursor: pointer;
-  list-style: none;
-}
-
-.home-travel-guide-card summary::-webkit-details-marker {
-  display: none;
-}
-
-.home-travel-guide-card details > p {
-  min-height: 0;
-  margin-top: 10px;
-  color: #697780;
-  font-size: 0.67rem;
-  line-height: 1.65;
-}
-
 .home-extra-cta > button {
   display: inline-flex;
   min-height: 44px;
@@ -4031,16 +3946,12 @@ img {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .home-travel-guide-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
 }
 
 @media (max-width: 520px) {
   .homepage-service-grid-curated,
   .home-trip-planner-fields,
-  .home-trip-planner-suggestions,
-  .home-travel-guide-grid {
+  .home-trip-planner-suggestions {
     grid-template-columns: 1fr;
   }
 
