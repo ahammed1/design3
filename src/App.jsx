@@ -25,14 +25,6 @@ import { Link, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import AuthPage from "./auth/AuthPage.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
-import Dashboard from "./dashboard/Dashboard.jsx";
-import DashboardLayout from "./dashboard/DashboardLayout.jsx";
-import Analytics from "./dashboard/pages/Analytics.jsx";
-import BookingDetails from "./dashboard/pages/BookingDetails.jsx";
-import Bookings from "./dashboard/pages/Bookings.jsx";
-import Guests from "./dashboard/pages/Guests.jsx";
-import Settings from "./dashboard/pages/Settings.jsx";
-import UpcomingTrips from "./dashboard/pages/UpcomingTrips.jsx";
 import "./App.css";
 
 const footerPhotos = [
@@ -1175,17 +1167,6 @@ function App() {
         <Route path="/" element={<BookingWebsite />} />
         <Route path="/admin/setup" element={<AuthPage />} />
         <Route path="/admin/sign-in" element={<AuthPage />} />
-        <Route path="/dashboard" element={<DashboardLayout />}>
-          <Route index element={<Navigate to="overview" replace />} />
-          <Route path="overview" element={<Dashboard />} />
-          <Route path="bookings" element={<Bookings />} />
-          <Route path="bookings/:bookingId" element={<BookingDetails />} />
-          <Route path="analytics" element={<Analytics />} />
-          <Route path="upcoming" element={<UpcomingTrips />} />
-          <Route path="guests" element={<Guests />} />
-          <Route path="guests/:guestId" element={<Guests />} />
-          <Route path="settings" element={<Settings />} />
-        </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </AuthProvider>

@@ -20,7 +20,7 @@ function AuthPage() {
   if (loading) {
     return <main className="admin-auth-page"><p className="auth-status">Loading administrator access…</p></main>;
   }
-  if (isAdmin) return <Navigate to="/dashboard/overview" replace />;
+  if (isAdmin) return <Navigate to="/" replace />;
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -32,13 +32,13 @@ function AuthPage() {
       if (isSetup) {
         const result = await createAdmin({ fullName, email, password });
         if (result.session) {
-          navigate("/dashboard/overview", { replace: true });
+          navigate("/", { replace: true });
         } else {
           setMessage("Administrator account created. Confirm the email address, then sign in.");
         }
       } else {
         await signIn({ email, password });
-        navigate("/dashboard/overview", { replace: true });
+        navigate("/", { replace: true });
       }
     } catch (authError) {
       setError(authError.message || "Unable to complete administrator authentication.");
