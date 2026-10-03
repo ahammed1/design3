@@ -23,30 +23,38 @@ import {
 import { useRef, useState } from "react";
 import { Link, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
-import AuthPage from "./auth/AuthPage.jsx";
-import { AuthProvider } from "./auth/AuthProvider.jsx";
 import "./App.css";
 
 const footerPhotos = [
   {
-    label: "Above the clouds",
+    label: "Lakeside escape",
     image:
-      "https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=700&q=80",
   },
   {
-    label: "Window seat views",
+    label: "Open-road adventure",
     image:
-      "https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=80",
   },
   {
-    label: "Discover Paris",
+    label: "Coastal hideaway",
     image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80",
   },
   {
-    label: "Explore Tokyo",
+    label: "Alpine morning",
     image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=700&q=80",
+      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    label: "Desert horizons",
+    image:
+      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80",
+  },
+  {
+    label: "Old-town streets",
+    image:
+      "https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=700&q=80",
   },
 ];
 
@@ -149,26 +157,70 @@ const popularDestinations = [
     image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=780&q=78",
   },
   {
-    city: "Thailand",
-    country: "Thailand",
-    description: "Island escapes, vivid markets, and rich local traditions.",
-    bestFor: "Beach & adventure",
-    bestSeason: "November – February",
-    featuredExperience: "Island hopping",
-    packageAvailability: "Beach and culture trips",
-    interests: ["Beach holidays", "Adventure", "Culture & heritage"],
-    image: "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=780&q=78",
+    city: "Tokyo",
+    country: "Japan",
+    description: "Find tranquil temples, lively neighbourhoods, and unforgettable food.",
+    bestFor: "Culture & city breaks",
+    bestSeason: "March – May",
+    featuredExperience: "Neighbourhood food tour",
+    packageAvailability: "Guided city stays",
+    interests: ["Culture & heritage", "Family trips", "Adventure"],
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=780&q=78",
   },
   {
     city: "London",
     country: "United Kingdom",
-    description: "Historic corners and a different plan every day.",
+    description: "Explore historic landmarks, leafy parks, and lively local streets.",
     bestFor: "Family & culture",
     bestSeason: "May – September",
     featuredExperience: "Historic city walk",
     packageAvailability: "Guided city breaks",
-    interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
+    interests: ["Family trips", "Culture & heritage"],
     image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Bangkok",
+    country: "Thailand",
+    description: "Discover golden temples, floating markets, and vibrant street food.",
+    bestFor: "Culture & food",
+    bestSeason: "November – February",
+    featuredExperience: "Temple and market tour",
+    packageAvailability: "City and culture stays",
+    interests: ["Culture & heritage", "Adventure", "Family trips"],
+    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Rome",
+    country: "Italy",
+    description: "Trace ancient history through piazzas, neighbourhoods, and local kitchens.",
+    bestFor: "History & food",
+    bestSeason: "April – June",
+    featuredExperience: "Historic centre walking tour",
+    packageAvailability: "Guided city breaks",
+    interests: ["Culture & heritage", "Family trips", "Honeymoon"],
+    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "New York",
+    country: "United States",
+    description: "Take in iconic skylines, world-class museums, and distinct local quarters.",
+    bestFor: "City & family breaks",
+    bestSeason: "April – June",
+    featuredExperience: "Neighbourhood discovery tour",
+    packageAvailability: "City stays and guided tours",
+    interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
+    image: "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Cape Town",
+    country: "South Africa",
+    description: "Pair mountain views with coastal drives, markets, and ocean air.",
+    bestFor: "Adventure & culture",
+    bestSeason: "November – March",
+    featuredExperience: "Coastal peninsula day trip",
+    packageAvailability: "Coastal and adventure stays",
+    interests: ["Adventure", "Culture & heritage", "Family trips"],
+    image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=780&q=78",
   },
 ];
 
@@ -259,37 +311,6 @@ const defaultTripPlanner = {
   budget: "Flexible",
 };
 
-const additionalTravelServices = [
-  {
-    title: "Private tours",
-    description: "Explore with a local guide and a pace that suits your day.",
-    icon: Compass,
-    action: "Browse experiences",
-    href: "#experiences",
-  },
-  {
-    title: "Local experiences",
-    description: "Add food, culture, and one-of-a-kind moments to your itinerary.",
-    icon: MapPin,
-    action: "Explore experiences",
-    href: "#experiences",
-  },
-  {
-    title: "Custom itineraries",
-    description: "Bring your ideas together into a journey shaped around you.",
-    icon: WandSparkles,
-    action: "Plan your trip",
-    href: "#home-trip-planner",
-  },
-  {
-    title: "Travel assistance",
-    description: "Get practical guidance while you prepare for your journey.",
-    icon: LifeBuoy,
-    action: "Plan with us",
-    href: "#home-trip-planner",
-  },
-];
-
 const travelGuides = [
   {
     title: "5 days in Bali",
@@ -312,20 +333,6 @@ const travelGuides = [
     image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80",
     guide: "Choose fewer bases and connect them by rail to keep the itinerary comfortable. Check seasonal access for mountain excursions, allow time for weather changes, and compare transport passes with the routes you expect to take.",
   },
-  {
-    title: "A romantic Maldives getaway",
-    destination: "Maldives",
-    description: "Find time for island views, calm water, and slow days together.",
-    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80",
-    guide: "Compare island transfer arrangements, meal plans, and room details before choosing a stay. Build in unscheduled time between water activities, and confirm what is included with each experience and transfer.",
-  },
-  {
-    title: "A family adventure in Singapore",
-    destination: "Singapore",
-    description: "Mix gardens, easy city exploring, and breaks for every age.",
-    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=900&q=80",
-    guide: "Group nearby sights together and keep flexible breaks in the day. Check opening times, accessibility, and child-friendly options ahead of time, and choose accommodation with convenient transport connections.",
-  },
 ];
 
 const travelExperiences = [
@@ -346,18 +353,6 @@ const travelExperiences = [
     location: "Switzerland",
     description: "Follow scenic trails through fresh alpine air and dramatic landscapes.",
     image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "City tours",
-    location: "Paris",
-    description: "See celebrated landmarks and charming neighbourhoods at your own pace.",
-    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "Cultural experiences",
-    location: "Bali",
-    description: "Connect with local art, traditions, and the stories behind each place.",
-    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
   },
   {
     name: "Scuba diving",
@@ -456,10 +451,13 @@ function BookingWebsite() {
   function scrollDestinations(direction) {
     const scroller = destinationScroller.current;
     if (!scroller) return;
-    scroller.scrollBy({
-      left: direction * scroller.clientWidth * 0.8,
-      behavior: "smooth",
-    });
+    const maxScroll = scroller.scrollWidth - scroller.clientWidth;
+    const target = scroller.scrollLeft + direction * scroller.clientWidth * 0.8;
+    const behavior = window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      ? "auto"
+      : "smooth";
+    const wrappedTarget = target > maxScroll ? 0 : target < 0 ? maxScroll : target;
+    scroller.scrollTo({ left: wrappedTarget, behavior });
   }
 
   function showSeasonalDestination(direction) {
@@ -477,7 +475,7 @@ function BookingWebsite() {
       rating: Number(reviewRating),
       text: reviewText.trim(),
     };
-    setTravelerReviews((reviews) => [review, ...reviews]);
+    setTravelerReviews((reviews) => [review, ...reviews].slice(0, 3));
     setReviewAuthor("");
     setReviewDestination("");
     setReviewRating("5");
@@ -539,165 +537,6 @@ function BookingWebsite() {
             >
               <ArrowDown size={17} />
             </button>
-          </section>
-
-          <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
-            <div className="homepage-section-heading homepage-section-heading-row">
-              <div>
-                <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
-                <h2 id="travel-services-title">Make the whole trip yours.</h2>
-                <p>Bring together the stays, local experiences, and practical details that make a trip feel complete.</p>
-              </div>
-              <Link className="homepage-text-link" to="#destinations">
-                Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
-            </div>
-            <div className="homepage-service-grid">
-              <article className="homepage-service-card homepage-service-hotel">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Hotels & stays</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Hotels & stays</h3>
-                  <p>Find a comfortable base for every stop, from boutique hideaways to welcoming city hotels.</p>
-                  <a href="#popular-packages">Explore stay ideas <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-              <article className="homepage-service-card homepage-service-car">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.48)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Local mobility</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Explore at your own pace</h3>
-                  <p>Consider local car options for scenic road trips, day outings, and places beyond the city centre.</p>
-                  <a href="#home-trip-planner">Plan a journey <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-              <article className="homepage-service-card homepage-service-transfer">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, rgba(15, 22, 29, 0.08), rgba(15, 22, 29, 0.62)), url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Airport transfers</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Airport transfers</h3>
-                  <p>Plan how you’ll get between the airport, your stay, and the places you want to explore.</p>
-                  <a href="#home-trip-planner">Add to your plans <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-            </div>
-            <div className="homepage-service-options">
-              {additionalTravelServices.map(({ title, description, icon: Icon, action, href }) => (
-                <article className="homepage-service-option" key={title}>
-                  <span><Icon size={18} aria-hidden="true" /></span>
-                  <div>
-                    <h3>{title}</h3>
-                    <p>{description}</p>
-                    <a href={href}>{action} <ArrowRight size={13} aria-hidden="true" /></a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="homepage-testimonials" aria-labelledby="homepage-testimonials-title">
-            <div className="homepage-section-heading">
-              <p className="booking-eyebrow">SHARE YOUR EXPERIENCE</p>
-              <h2 id="homepage-testimonials-title">Write a traveler review</h2>
-              <p>Tell others what made your journey memorable.</p>
-            </div>
-            <form
-              className="homepage-review-form"
-              onSubmit={submitTravelerReview}
-            >
-              <div className="homepage-review-fields">
-                <label className="homepage-review-field">
-                  <span>Your name</span>
-                  <input
-                    autoComplete="name"
-                    maxLength={60}
-                    onChange={(event) => setReviewAuthor(event.target.value)}
-                    placeholder="e.g. Alex Morgan"
-                    required
-                    value={reviewAuthor}
-                  />
-                </label>
-                <label className="homepage-review-field">
-                  <span>Destination</span>
-                  <input
-                    maxLength={80}
-                    onChange={(event) => setReviewDestination(event.target.value)}
-                    placeholder="Where did you travel?"
-                    required
-                    value={reviewDestination}
-                  />
-                </label>
-                <label className="homepage-review-field">
-                  <span>Your rating</span>
-                  <select
-                    onChange={(event) => setReviewRating(event.target.value)}
-                    value={reviewRating}
-                  >
-                    <option value="5">5 — Excellent</option>
-                    <option value="4">4 — Very good</option>
-                    <option value="3">3 — Good</option>
-                    <option value="2">2 — Fair</option>
-                    <option value="1">1 — Needs improvement</option>
-                  </select>
-                </label>
-                <label className="homepage-review-field homepage-review-field-message">
-                  <span>Your review</span>
-                  <textarea
-                    maxLength={1000}
-                    onChange={(event) => setReviewText(event.target.value)}
-                    placeholder="Share a little about your travel experience..."
-                    required
-                    rows={4}
-                    value={reviewText}
-                  />
-                </label>
-              </div>
-              <div className="homepage-review-submit-row">
-                <p>Reviews are kept in this page session and are not saved.</p>
-                <button className="homepage-review-submit" type="submit">
-                  Submit review <ArrowRight size={16} aria-hidden="true" />
-                </button>
-              </div>
-              {reviewStatus && <p className="homepage-review-status" role="status">{reviewStatus}</p>}
-            </form>
-            {travelerReviews.length > 0 && (
-              <div className="homepage-review-grid" aria-label="Reviews submitted this session">
-                {travelerReviews.map((review) => (
-                  <article className="homepage-review-card" key={review.id}>
-                    <div className="homepage-review-rating" aria-label={`${review.rating} out of 5 stars`}>
-                      {Array.from({ length: review.rating }, (_, index) => (
-                        <Star key={index} size={15} fill="currentColor" aria-hidden="true" />
-                      ))}
-                    </div>
-                    <p className="homepage-review-text">“{review.text}”</p>
-                    <div className="homepage-review-footer">
-                      <span className="homepage-review-avatar" aria-hidden="true">
-                        {review.author.charAt(0).toUpperCase()}
-                      </span>
-                      <span>
-                        <strong>{review.author}</strong>
-                        <small>{review.destination}</small>
-                      </span>
-                    </div>
-                  </article>
-                ))}
-              </div>
-            )}
           </section>
 
           <section className="home-extra-section home-popular-destinations" id="destinations" aria-labelledby="home-popular-destinations-title">
@@ -859,7 +698,6 @@ function BookingWebsite() {
                   <div className="home-trip-planner-suggestions">
                     {plannerSuggestions.map((holiday) => (
                       <article className="home-trip-planner-suggestion" key={holiday.name}>
-                        <img src={holiday.image} alt="" />
                         <div>
                           <span>{holiday.type} · {holiday.duration}</span>
                           <h4>{holiday.name}</h4>
@@ -909,7 +747,6 @@ function BookingWebsite() {
                   .filter((holiday) => holiday.interests.includes(selectedInterest))
                   .map((holiday) => (
                     <article className="home-interest-package" key={holiday.name}>
-                      <img src={holiday.image} alt="" />
                       <span><strong>{holiday.name}</strong><small>{holiday.destination} · {holiday.duration}</small></span>
                       <a href="#home-holiday-packages-title" aria-label={`View ${holiday.name} package`}>
                         View <ArrowRight size={14} aria-hidden="true" />
@@ -988,27 +825,59 @@ function BookingWebsite() {
             </div>
           </section>
 
-          <section className="home-extra-section home-complete-trip" aria-labelledby="home-complete-trip-title">
-            <div className="home-extra-heading">
-              <p className="booking-eyebrow">MORE THAN A PLACE TO STAY</p>
-              <h2 id="home-complete-trip-title">Why book a complete trip?</h2>
-              <p>Thoughtful planning connects the practical details with the moments you travel for.</p>
+          <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
+            <div className="homepage-section-heading homepage-section-heading-row">
+              <div>
+                <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
+                <h2 id="travel-services-title">Make the whole trip yours.</h2>
+                <p>Bring together the stays, local experiences, and practical details that make a trip feel complete.</p>
+              </div>
+              <Link className="homepage-text-link" to="#destinations">
+                Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
             </div>
-            <div className="home-complete-trip-grid">
-              <article>
-                <span><Hotel size={20} aria-hidden="true" /></span>
-                <h3>One journey, considered together</h3>
-                <p>Bring stays, tours, experiences, and local transfers into one balanced itinerary.</p>
+            <div className="homepage-service-grid homepage-service-grid-curated">
+              <article className="homepage-service-card homepage-service-hotel">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Hotels & stays</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Hotels & stays</h3>
+                  <p>Find a comfortable base for every stop, from boutique hideaways to welcoming city hotels.</p>
+                  <a href="#popular-packages">Explore stay ideas <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
               </article>
-              <article>
-                <span><Compass size={20} aria-hidden="true" /></span>
-                <h3>Room for your travel style</h3>
-                <p>Shape the days for a beach break, family holiday, cultural visit, or private trip.</p>
+              <article className="homepage-service-card homepage-service-car">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.48)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Local mobility</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Explore at your own pace</h3>
+                  <p>Consider local car options for scenic road trips, day outings, and places beyond the city centre.</p>
+                  <a href="#home-trip-planner">Plan a journey <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
               </article>
-              <article>
-                <span><LifeBuoy size={20} aria-hidden="true" /></span>
-                <h3>Help with the practical details</h3>
-                <p>Keep the important arrangements in view and know where to turn for travel guidance.</p>
+              <article className="homepage-service-card homepage-service-transfer">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, rgba(15, 22, 29, 0.08), rgba(15, 22, 29, 0.62)), url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Airport transfers</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Airport transfers</h3>
+                  <p>Plan how you’ll get between the airport, your stay, and the places you want to explore.</p>
+                  <a href="#home-trip-planner">Add to your plans <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
               </article>
             </div>
           </section>
@@ -1080,6 +949,96 @@ function BookingWebsite() {
                 </div>
               </article>
             </div>
+          </section>
+
+          <section className="homepage-testimonials" aria-labelledby="homepage-testimonials-title">
+            <div className="homepage-section-heading">
+              <p className="booking-eyebrow">SHARE YOUR EXPERIENCE</p>
+              <h2 id="homepage-testimonials-title">Write a traveler review</h2>
+              <p>Tell others what made your journey memorable.</p>
+            </div>
+            <form
+              className="homepage-review-form"
+              onSubmit={submitTravelerReview}
+            >
+              <div className="homepage-review-fields">
+                <label className="homepage-review-field">
+                  <span>Your name</span>
+                  <input
+                    autoComplete="name"
+                    maxLength={60}
+                    onChange={(event) => setReviewAuthor(event.target.value)}
+                    placeholder="e.g. Alex Morgan"
+                    required
+                    value={reviewAuthor}
+                  />
+                </label>
+                <label className="homepage-review-field">
+                  <span>Destination</span>
+                  <input
+                    maxLength={80}
+                    onChange={(event) => setReviewDestination(event.target.value)}
+                    placeholder="Where did you travel?"
+                    required
+                    value={reviewDestination}
+                  />
+                </label>
+                <label className="homepage-review-field">
+                  <span>Your rating</span>
+                  <select
+                    onChange={(event) => setReviewRating(event.target.value)}
+                    value={reviewRating}
+                  >
+                    <option value="5">5 — Excellent</option>
+                    <option value="4">4 — Very good</option>
+                    <option value="3">3 — Good</option>
+                    <option value="2">2 — Fair</option>
+                    <option value="1">1 — Needs improvement</option>
+                  </select>
+                </label>
+                <label className="homepage-review-field homepage-review-field-message">
+                  <span>Your review</span>
+                  <textarea
+                    maxLength={1000}
+                    onChange={(event) => setReviewText(event.target.value)}
+                    placeholder="Share a little about your travel experience..."
+                    required
+                    rows={4}
+                    value={reviewText}
+                  />
+                </label>
+              </div>
+              <div className="homepage-review-submit-row">
+                <p>Reviews are kept in this page session and are not saved.</p>
+                <button className="homepage-review-submit" type="submit">
+                  Submit review <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+              {reviewStatus && <p className="homepage-review-status" role="status">{reviewStatus}</p>}
+            </form>
+            {travelerReviews.length > 0 && (
+              <div className="homepage-review-grid" aria-label="Reviews submitted this session">
+                {travelerReviews.map((review) => (
+                  <article className="homepage-review-card" key={review.id}>
+                    <div className="homepage-review-rating" aria-label={`${review.rating} out of 5 stars`}>
+                      {Array.from({ length: review.rating }, (_, index) => (
+                        <Star key={index} size={15} fill="currentColor" aria-hidden="true" />
+                      ))}
+                    </div>
+                    <p className="homepage-review-text">“{review.text}”</p>
+                    <div className="homepage-review-footer">
+                      <span className="homepage-review-avatar" aria-hidden="true">
+                        {review.author.charAt(0).toUpperCase()}
+                      </span>
+                      <span>
+                        <strong>{review.author}</strong>
+                        <small>{review.destination}</small>
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
         </main>
 
@@ -1162,14 +1121,10 @@ function BookingWebsite() {
 
 function App() {
   return (
-    <AuthProvider>
-      <Routes>
-        <Route path="/" element={<BookingWebsite />} />
-        <Route path="/admin/setup" element={<AuthPage />} />
-        <Route path="/admin/sign-in" element={<AuthPage />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<BookingWebsite />} />
+      <Route path="*" element={<Navigate to="/" replace />} />
+    </Routes>
   );
 }
 

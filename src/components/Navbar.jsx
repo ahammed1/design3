@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Menu, PlaneTakeoff, X } from "lucide-react";
-import { Link } from "react-router-dom";
 import "./Navbar.css";
 
 const navItems = [
@@ -10,7 +9,6 @@ const navItems = [
   { label: "Experiences", href: "#experiences" },
   { label: "Services", href: "#travel-services" },
   { label: "About", href: "#about" },
-  { label: "Admin", to: "/admin/sign-in" },
 ];
 
 function Navbar() {
@@ -46,9 +44,7 @@ function Navbar() {
         aria-label="Main navigation"
       >
         <div className="navbar-links">
-          {navItems.map((item) => item.to ? (
-            <Link key={item.to} to={item.to} onClick={closeMenu}>{item.label}</Link>
-          ) : (
+          {navItems.map((item) => (
             <a key={item.href} href={item.href} onClick={closeMenu}>{item.label}</a>
           ))}
         </div>

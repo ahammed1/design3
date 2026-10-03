@@ -1,11 +1,5 @@
 # React + Vite
 
-## Administrator access
-
-Administrator sign-up and sign-in use Supabase Auth. Copy `.env.example` to `.env.local` and set the Supabase project URL, publishable/anon key, and the one administrator email. The account can then be created from `/admin/setup`; subsequent visits use `/admin/sign-in`.
-
-The admin email allowlist is a frontend gate. Configure Supabase Auth policies for your deployment, and add server-side authorization/RLS before storing protected business data in Supabase. Booking records in this demo are held in memory and reset when the app reloads.
-
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:
