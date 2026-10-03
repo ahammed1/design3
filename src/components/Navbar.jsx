@@ -5,8 +5,6 @@ import "./Navbar.css";
 
 const navItems = [
   { label: "Home", href: "#home" },
-  { label: "Flights", href: "#booking" },
-  { label: "Flight Search", to: "/flights/search" },
   { label: "Admin", to: "/admin/sign-in" },
   { label: "Destinations", href: "#destinations" },
   { label: "Stay & Go", href: "#travel-services" },
@@ -52,8 +50,8 @@ function Navbar() {
             <a key={item.href} href={item.href} onClick={closeMenu}>{item.label}</a>
           ))}
         </div>
-        <a className="navbar-cta" href="#booking" onClick={closeMenu}>
-          Get Ticket Now
+        <a className="navbar-cta" href="#destinations" onClick={closeMenu}>
+          Explore destinations
         </a>
       </nav>
     </header>

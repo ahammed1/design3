@@ -1,37 +1,30 @@
 import {
   ArrowDown,
-  ArrowLeftRight,
   ArrowRight,
   ArrowUpRight,
-  BadgeCheck,
   BusFront,
   CarFront,
-  CalendarDays,
-  Headphones,
+  ChevronLeft,
+  ChevronRight,
+  Compass,
+  Heart,
   Hotel,
+  Landmark,
+  LifeBuoy,
   MapPin,
-  Plane,
+  Mountain,
+  Palmtree,
   PlaneTakeoff,
-  Plus,
-  ShieldCheck,
-  Search,
-  TicketCheck,
+  Star,
+  Sparkles,
   Users,
-  UserRound,
-  X,
+  WandSparkles,
 } from "lucide-react";
-import { useState } from "react";
-import { Link, Navigate, Route, Routes, useNavigate } from "react-router-dom";
+import { useRef, useState } from "react";
+import { Link, Navigate, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import AuthPage from "./auth/AuthPage.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
-import BookingConfirmation from "./flights/BookingConfirmation.jsx";
-import FlightDetails from "./flights/FlightDetails.jsx";
-import FlightResults from "./flights/FlightResults.jsx";
-import FlightSearch from "./flights/FlightSearch.jsx";
-import { FlightBookingProvider } from "./flights/FlightBookingContext.jsx";
-import { useFlightBooking } from "./flights/flightBookingStore.js";
-import PassengerDetails from "./flights/PassengerDetails.jsx";
 import Dashboard from "./dashboard/Dashboard.jsx";
 import DashboardLayout from "./dashboard/DashboardLayout.jsx";
 import Analytics from "./dashboard/pages/Analytics.jsx";
@@ -41,58 +34,6 @@ import Guests from "./dashboard/pages/Guests.jsx";
 import Settings from "./dashboard/pages/Settings.jsx";
 import UpcomingTrips from "./dashboard/pages/UpcomingTrips.jsx";
 import "./App.css";
-
-const destinations = [
-  {
-    city: "Paris, France",
-    text: "The City of Light is a celebration of art, food, and unforgettable evenings.",
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
-    href: "https://www.globalcharter.com/row-destinations?utm_source=google&utm_medium=cpc&utm_campaign=&utm_id=23766774360&utm_term=flights+to+paris&utm_content=808654092473&gad_source=1&gad_campaignid=23766774360&gbraid=0AAAAABiAiF4O4E-9jGgkcIOqfmnpD-1WI&gclid=CjwKCAjwoOjVBhArEiwAUwDak_GLlXEMdgOahZK6Nko8_DB8rg-HfwcGjkV65gYe3bQXyFnB37RL-xoCmysQAvD_BwE",
-  },
-  {
-    city: "Berlin, Germany",
-    text: "A creative, modern city with historic streets, vibrant culture, and warm energy.",
-    image:
-      "https://images.unsplash.com/photo-1528728329032-2972f65dfb3f?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "Sydney, Australia",
-    text: "Sunlit beaches, iconic harbors, and vibrant urban experiences await your next escape.",
-    image:
-      "https://images.unsplash.com/photo-1506973035872-a4ec16b8e8d9?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "Toronto, Canada",
-    text: "Diverse neighborhoods, skyline views, and a welcoming city atmosphere at every turn.",
-    image:
-      "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "Delhi, India",
-    text: "A bold city of iconic landmarks, unforgettable food, and lively local culture.",
-    image:
-      "https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "London, UK",
-    text: "Historic charm, premium culture, and a timeless destination for memorable journeys.",
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "New York, USA",
-    text: "Take in iconic skylines, endless energy, and unforgettable city adventures.",
-    image:
-      "https://images.unsplash.com/photo-1499092346589-b9b6be3e94b2?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    city: "Tokyo, Japan",
-    text: "Discover Tokyo's glowing skyline, peaceful temples, and unforgettable food.",
-    image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=80",
-  },
-];
 
 const footerPhotos = [
   {
@@ -117,168 +58,256 @@ const footerPhotos = [
   },
 ];
 
-const homepageDeals = [
+const seasonalDestinations = [
   {
-    origin: "Bengaluru (BLR)",
-    destination: "Dubai (DXB)",
+    season: "Winter sun",
     city: "Dubai",
     country: "United Arab Emirates",
-    price: 228,
-    image:
-      "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
+    description: "Warm days, open-air evenings, and striking city views.",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=820&q=78",
   },
   {
-    origin: "New York (JFK)",
-    destination: "Paris (CDG)",
+    season: "Spring city breaks",
     city: "Paris",
     country: "France",
-    price: 398,
-    image:
-      "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
+    description: "A lovely season for long walks and neighbourhood cafés.",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=820&q=78",
   },
   {
-    origin: "Singapore (SIN)",
-    destination: "Tokyo (HND)",
+    season: "Summer discoveries",
+    city: "Singapore",
+    country: "Singapore",
+    description: "Garden paths, waterfront views, and delicious late nights.",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=820&q=78",
+  },
+  {
+    season: "Autumn culture",
     city: "Tokyo",
     country: "Japan",
-    price: 318,
-    image:
-      "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=900&q=80",
+    description: "Explore lively streets, peaceful temples, and seasonal colour.",
+    image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=820&q=78",
+  },
+];
+
+const popularDestinations = [
+  {
+    city: "Dubai",
+    country: "United Arab Emirates",
+    description: "A striking mix of desert calm and city energy.",
+    bestFor: "Luxury & family breaks",
+    interests: ["Luxury escapes", "Family trips", "Culture & heritage"],
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=780&q=78",
   },
   {
-    origin: "Delhi (DEL)",
-    destination: "London (LHR)",
+    city: "Maldives",
+    country: "Maldives",
+    description: "Turquoise lagoons, quiet islands, and slow days by the sea.",
+    bestFor: "Beach & honeymoon",
+    interests: ["Beach holidays", "Honeymoon", "Luxury escapes"],
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Bali",
+    country: "Indonesia",
+    description: "Green landscapes, island air, and room to unwind.",
+    bestFor: "Culture & couples",
+    interests: ["Beach holidays", "Honeymoon", "Adventure", "Culture & heritage"],
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Paris",
+    country: "France",
+    description: "Slow mornings, grand avenues, and little cafés.",
+    bestFor: "Culture & couples",
+    interests: ["Honeymoon", "Luxury escapes", "Culture & heritage"],
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Switzerland",
+    country: "Switzerland",
+    description: "Alpine scenery, lakeside towns, and scenic rail journeys.",
+    bestFor: "Adventure & family",
+    interests: ["Adventure", "Family trips", "Luxury escapes"],
+    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Singapore",
+    country: "Singapore",
+    description: "Waterfront gardens, delicious food, and lively city days.",
+    bestFor: "Family & city breaks",
+    interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=780&q=78",
+  },
+  {
+    city: "Thailand",
+    country: "Thailand",
+    description: "Island escapes, vivid markets, and rich local traditions.",
+    bestFor: "Beach & adventure",
+    interests: ["Beach holidays", "Adventure", "Culture & heritage"],
+    image: "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=780&q=78",
+  },
+  {
     city: "London",
     country: "United Kingdom",
-    price: 486,
-    image:
-      "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=900&q=80",
+    description: "Historic corners and a different plan every day.",
+    bestFor: "Family & culture",
+    interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
+    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=780&q=78",
   },
 ];
 
-const homepageFaqs = [
+const holidayPackages = [
   {
-    question: "How do I compare the available flights?",
-    answer:
-      "Enter your route and travel dates in the search form. On the results page, filter by stops, airline, price, departure or arrival time, and duration, then sort by best, cheapest, or fastest.",
+    name: "Dubai Escape",
+    destination: "Dubai, United Arab Emirates",
+    duration: "4 Nights / 5 Days",
+    type: "Luxury",
+    interests: ["Luxury escapes", "Family trips", "Culture & heritage"],
+    description: "A city stay with landmark views, desert discovery, and time to unwind.",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
   },
   {
-    question: "Can I choose a direct flight?",
-    answer:
-      "Yes. Turn on Direct flights only in the search form, or use the stops filter on the results page to show nonstop options.",
+    name: "Maldives Paradise",
+    destination: "Maldives",
+    duration: "3 Nights / 4 Days",
+    type: "Honeymoon",
+    interests: ["Beach holidays", "Honeymoon", "Luxury escapes"],
+    description: "An island retreat with blue-water views and unhurried beach days.",
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80",
   },
   {
-    question: "What is included in the displayed fare?",
-    answer:
-      "Each sample flight includes fare and baggage information in its details. The prices on this demo site are illustrative and are not live quotes.",
+    name: "Bali Experience",
+    destination: "Bali, Indonesia",
+    duration: "5 Nights / 6 Days",
+    type: "Cultural",
+    interests: ["Beach holidays", "Honeymoon", "Adventure", "Culture & heritage"],
+    description: "Explore lush landscapes, local traditions, and beautiful island shores.",
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
   },
   {
-    question: "Can I change passenger information after booking?",
-    answer:
-      "This frontend demo records the details you submit and displays them in the confirmation and dashboard. Changes are not sent to an airline or booking provider.",
+    name: "Swiss Adventure",
+    destination: "Switzerland",
+    duration: "6 Nights / 7 Days",
+    type: "Adventure",
+    interests: ["Adventure", "Family trips", "Luxury escapes"],
+    description: "Discover mountain scenery, lakeside towns, and memorable alpine journeys.",
+    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80",
   },
 ];
 
-const airports = [
-  { value: "Bengaluru (BLR)", label: "Kempegowda International Airport" },
-  { value: "Chennai (MAA)", label: "Chennai International Airport" },
-  { value: "Kochi (COK)", label: "Cochin International Airport" },
-  { value: "Kolkata (CCU)", label: "Netaji Subhas Chandra Bose International Airport" },
-  { value: "Hyderabad (HYD)", label: "Rajiv Gandhi International Airport" },
-  { value: "Ahmedabad (AMD)", label: "Sardar Vallabhbhai Patel International Airport" },
-  { value: "Dubai (DXB)", label: "Dubai International Airport" },
-  { value: "Doha (DOH)", label: "Hamad International Airport" },
-  { value: "Bangkok (BKK)", label: "Suvarnabhumi Airport" },
-  { value: "Rome (FCO)", label: "Leonardo da Vinci–Fiumicino Airport" },
-  { value: "Istanbul (IST)", label: "Istanbul Airport" },
-  { value: "London (LHR)", label: "Heathrow Airport" },
-  { value: "New York (JFK)", label: "John F. Kennedy International Airport" },
-  { value: "Paris (CDG)", label: "Charles de Gaulle Airport" },
-  { value: "Tokyo (HND)", label: "Haneda Airport" },
+const travelExperiences = [
+  {
+    name: "Desert safari",
+    location: "Dubai",
+    description: "Take in golden dunes, wide-open skies, and an evening in the desert.",
+    image: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "Island hopping",
+    location: "Thailand",
+    description: "Spend a day discovering clear-water coves and laid-back island life.",
+    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "Mountain trekking",
+    location: "Switzerland",
+    description: "Follow scenic trails through fresh alpine air and dramatic landscapes.",
+    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "City tours",
+    location: "Paris",
+    description: "See celebrated landmarks and charming neighbourhoods at your own pace.",
+    image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "Cultural experiences",
+    location: "Bali",
+    description: "Connect with local art, traditions, and the stories behind each place.",
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
+  },
+  {
+    name: "Scuba diving",
+    location: "Maldives",
+    description: "Explore the colour and calm of a vibrant world beneath the water.",
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const travelInterests = [
+  { label: "Beach holidays", icon: Palmtree },
+  { label: "Honeymoon", icon: Heart },
+  { label: "Family trips", icon: Users },
+  { label: "Adventure", icon: Mountain },
+  { label: "Luxury escapes", icon: Sparkles },
+  { label: "Culture & heritage", icon: Landmark },
+];
+
+const agencyBenefits = [
+  {
+    title: "Trips shaped around you",
+    description: "Choose a ready-made holiday or build an itinerary around your interests.",
+    icon: WandSparkles,
+  },
+  {
+    title: "More than a destination",
+    description: "Bring stays, guided tours, local experiences, and time to explore together.",
+    icon: Compass,
+  },
+  {
+    title: "Options for every kind of traveler",
+    description: "Find inspiration for couples, families, adventurers, and culture seekers.",
+    icon: Heart,
+  },
+  {
+    title: "Helpful travel assistance",
+    description: "Get practical guidance as you plan the details of your next trip.",
+    icon: LifeBuoy,
+  },
 ];
 
 function BookingWebsite() {
-  const navigate = useNavigate();
-  const { updateSearch } = useFlightBooking();
-  const [tripType, setTripType] = useState("round-trip");
-  const [origin, setOrigin] = useState("");
-  const [destination, setDestination] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
-  const [passengers, setPassengers] = useState("1");
-  const [travelClass, setTravelClass] = useState("Economy");
-  const [additionalLegs, setAdditionalLegs] = useState([]);
-  const [searchMessage, setSearchMessage] = useState("");
-  const [airportsSwapped, setAirportsSwapped] = useState(false);
-  const today = new Date();
-  today.setMinutes(today.getMinutes() - today.getTimezoneOffset());
-  const earliestDeparture = today.toISOString().slice(0, 10);
+  const destinationScroller = useRef(null);
+  const [seasonalIndex, setSeasonalIndex] = useState(0);
+  const [selectedInterest, setSelectedInterest] = useState(travelInterests[0].label);
+  const [travelerReviews, setTravelerReviews] = useState([]);
+  const [reviewAuthor, setReviewAuthor] = useState("");
+  const [reviewDestination, setReviewDestination] = useState("");
+  const [reviewRating, setReviewRating] = useState("5");
+  const [reviewText, setReviewText] = useState("");
+  const [reviewStatus, setReviewStatus] = useState("");
+  const seasonalDestination = seasonalDestinations[seasonalIndex];
 
-  const airportName = (value) =>
-    airports.find((airport) => airport.value === value)?.label ??
-    "City, airport or IATA code";
-  const needsReturnDate = tripType === "round-trip";
-  const hasCompleteAdditionalLegs =
-    tripType !== "multi-city" ||
-    (additionalLegs.length > 0 &&
-      additionalLegs.every((leg) => leg.origin.trim() && leg.destination.trim() && leg.date));
-  const canSearch =
-    origin.trim() &&
-    destination.trim() &&
-    departureDate &&
-    (!needsReturnDate || (returnDate && returnDate >= departureDate)) &&
-    hasCompleteAdditionalLegs;
-
-  function swapAirports() {
-    setOrigin(destination);
-    setDestination(origin);
-    setAirportsSwapped((swapped) => !swapped);
-    setSearchMessage("");
+  function scrollDestinations(direction) {
+    const scroller = destinationScroller.current;
+    if (!scroller) return;
+    scroller.scrollBy({
+      left: direction * scroller.clientWidth * 0.8,
+      behavior: "smooth",
+    });
   }
 
-  function updateLeg(index, field, value) {
-    setAdditionalLegs((legs) =>
-      legs.map((leg, legIndex) =>
-        legIndex === index ? { ...leg, [field]: value } : leg,
-      ),
+  function showSeasonalDestination(direction) {
+    setSeasonalIndex((index) =>
+      (index + direction + seasonalDestinations.length) % seasonalDestinations.length,
     );
   }
 
-  function submitFlightSearch(event) {
+  function submitTravelerReview(event) {
     event.preventDefault();
-    if (tripType === "multi-city") {
-      setSearchMessage("Multi-city search is not available in this demo yet. Choose Round Trip or One Way.");
-      return;
-    }
-    updateSearch({
-      tripType,
-      origin: origin.trim(),
-      destination: destination.trim(),
-      departureDate,
-      returnDate: tripType === "round-trip" ? returnDate : "",
-      travellers: Number(passengers),
-      cabinClass: travelClass,
-      directOnly: false,
-    });
-    setSearchMessage("");
-    navigate("/flights/results");
-  }
-
-  function searchHomepageDeal(deal) {
-    const departure = new Date();
-    departure.setDate(departure.getDate() + 14);
-    departure.setMinutes(departure.getMinutes() - departure.getTimezoneOffset());
-    updateSearch({
-      tripType: "one-way",
-      origin: deal.origin,
-      destination: deal.destination,
-      departureDate: departure.toISOString().slice(0, 10),
-      returnDate: "",
-      travellers: 1,
-      cabinClass: "Economy",
-      directOnly: false,
-    });
-    navigate("/flights/results");
+    const review = {
+      id: `${Date.now()}-${reviewAuthor.trim()}`,
+      author: reviewAuthor.trim(),
+      destination: reviewDestination.trim(),
+      rating: Number(reviewRating),
+      text: reviewText.trim(),
+    };
+    setTravelerReviews((reviews) => [review, ...reviews]);
+    setReviewAuthor("");
+    setReviewDestination("");
+    setReviewRating("5");
+    setReviewText("");
+    setReviewStatus("Thank you. Your review has been added for this session.");
   }
 
   return (
@@ -314,9 +343,9 @@ function BookingWebsite() {
               <button
                 className="primary-btn"
                 type="button"
-                onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}
+                onClick={() => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth" })}
               >
-                Get Ticket Now
+                Explore destinations
               </button>
             </div>
 
@@ -330,366 +359,11 @@ function BookingWebsite() {
             <button
               className="scroll-btn"
               type="button"
-              aria-label="Scroll to booking"
-              onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}
+              aria-label="Scroll to destinations"
+              onClick={() => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth" })}
             >
               <ArrowDown size={17} />
             </button>
-          </section>
-
-          <section className="booking-area" id="booking">
-            <div className="booking-header">
-              <div className="booking-heading-copy">
-                <p className="booking-eyebrow">PLAN YOUR NEXT JOURNEY</p>
-                <h2>Where would you like to go?</h2>
-                <p>Compare options and find the right trip for you.</p>
-              </div>
-            </div>
-
-            <form className="flight-search-card" onSubmit={submitFlightSearch}>
-              <div className="flight-search-options">
-                <div className="trip-type-control" role="group" aria-label="Trip type">
-                  {[
-                    { value: "round-trip", label: "Round Trip" },
-                    { value: "one-way", label: "One Way" },
-                    { value: "multi-city", label: "Multi City" },
-                  ].map((type) => (
-                    <button
-                      key={type.value}
-                      className={`trip-type-option${tripType === type.value ? " selected" : ""}`}
-                      type="button"
-                      aria-pressed={tripType === type.value}
-                      onClick={() => {
-                        setTripType(type.value);
-                        setSearchMessage("");
-                      }}
-                    >
-                      {type.label}
-                    </button>
-                  ))}
-                </div>
-                <span className="flight-search-caption">Book your next flight</span>
-              </div>
-
-              <datalist id="flight-airports">
-                {airports.map((airport) => (
-                  <option key={airport.value} value={airport.value} />
-                ))}
-              </datalist>
-
-              <div className="flight-search-fields">
-                <div className="flight-airport-pair">
-                  <div className="flight-search-field airport-field">
-                    <label htmlFor="booking-origin">From</label>
-                    <div className="flight-field-control">
-                      <MapPin size={18} aria-hidden="true" />
-                      <div className="flight-field-text">
-                        <input
-                          id="booking-origin"
-                          autoComplete="off"
-                          list="flight-airports"
-                          placeholder=""
-                          value={origin}
-                          onChange={(event) => {
-                            setOrigin(event.target.value);
-                            setSearchMessage("");
-                          }}
-                          required
-                        />
-                        <span>{airportName(origin)}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <button
-                    className={`airport-swap-button${airportsSwapped ? " is-swapped" : ""}`}
-                    type="button"
-                    aria-label="Swap departure and destination"
-                    onClick={swapAirports}
-                  >
-                    <ArrowLeftRight size={16} aria-hidden="true" />
-                  </button>
-
-                  <div className="flight-search-field airport-field">
-                    <label htmlFor="booking-destination">To</label>
-                    <div className="flight-field-control">
-                      <PlaneTakeoff size={18} aria-hidden="true" />
-                      <div className="flight-field-text">
-                        <input
-                          id="booking-destination"
-                          autoComplete="off"
-                          list="flight-airports"
-                          placeholder=""
-                          value={destination}
-                          onChange={(event) => {
-                            setDestination(event.target.value);
-                            setSearchMessage("");
-                          }}
-                          required
-                        />
-                        <span>{airportName(destination)}</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="flight-search-field">
-                  <label htmlFor="booking-departure">Departure</label>
-                  <div className="flight-field-control">
-                    <CalendarDays size={18} aria-hidden="true" />
-                    <input
-                      id="booking-departure"
-                      aria-label="Departure date"
-                      type="date"
-                      min={earliestDeparture}
-                      value={departureDate}
-                      onChange={(event) => {
-                        setDepartureDate(event.target.value);
-                        setSearchMessage("");
-                      }}
-                      required
-                    />
-                  </div>
-                </div>
-
-                {needsReturnDate && (
-                  <div className="flight-search-field">
-                    <label htmlFor="booking-return">Return</label>
-                    <div className="flight-field-control">
-                      <CalendarDays size={18} aria-hidden="true" />
-                      <input
-                        id="booking-return"
-                        aria-label="Return date"
-                        type="date"
-                        min={departureDate || earliestDeparture}
-                        value={returnDate}
-                        onChange={(event) => {
-                          setReturnDate(event.target.value);
-                          setSearchMessage("");
-                        }}
-                        required
-                      />
-                    </div>
-                  </div>
-                )}
-
-                <div className="flight-search-field passenger-field">
-                  <label htmlFor="booking-passengers">Passengers &amp; Class</label>
-                  <div className="flight-field-control passenger-control">
-                    <UserRound size={18} aria-hidden="true" />
-                    <select
-                      id="booking-passengers"
-                      aria-label="Number of adult passengers"
-                      value={passengers}
-                      onChange={(event) => setPassengers(event.target.value)}
-                    >
-                      <option value="1">1 Adult</option>
-                      <option value="2">2 Adults</option>
-                      <option value="3">3 Adults</option>
-                      <option value="4">4 Adults</option>
-                      <option value="5">5 Adults</option>
-                      <option value="6">6 Adults</option>
-                    </select>
-                    <span className="passenger-divider" aria-hidden="true" />
-                    <select
-                      aria-label="Travel class"
-                      value={travelClass}
-                      onChange={(event) => setTravelClass(event.target.value)}
-                    >
-                      <option>Economy</option>
-                      <option>Premium Economy</option>
-                      <option>Business</option>
-                      <option>First</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              {tripType === "multi-city" && (
-                <div className="additional-flight-legs">
-                  {additionalLegs.map((leg, index) => (
-                    <div className="additional-flight-row" key={leg.id}>
-                      <div className="flight-search-field">
-                        <label htmlFor={`multi-city-origin-${leg.id}`}>Flight {index + 2} from</label>
-                        <div className="flight-field-control">
-                          <MapPin size={18} aria-hidden="true" />
-                          <input
-                            id={`multi-city-origin-${leg.id}`}
-                            aria-label={`Flight ${index + 2} origin`}
-                            list="flight-airports"
-                            placeholder="City or airport"
-                            value={leg.origin}
-                            onChange={(event) => updateLeg(index, "origin", event.target.value)}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="flight-search-field">
-                        <label htmlFor={`multi-city-destination-${leg.id}`}>To</label>
-                        <div className="flight-field-control">
-                          <PlaneTakeoff size={18} aria-hidden="true" />
-                          <input
-                            id={`multi-city-destination-${leg.id}`}
-                            aria-label={`Flight ${index + 2} destination`}
-                            list="flight-airports"
-                            placeholder="City or airport"
-                            value={leg.destination}
-                            onChange={(event) => updateLeg(index, "destination", event.target.value)}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <div className="flight-search-field">
-                        <label htmlFor={`multi-city-date-${leg.id}`}>Departure</label>
-                        <div className="flight-field-control">
-                          <CalendarDays size={18} aria-hidden="true" />
-                          <input
-                            id={`multi-city-date-${leg.id}`}
-                            aria-label={`Flight ${index + 2} departure date`}
-                            type="date"
-                            min={
-                              additionalLegs[index - 1]?.date ||
-                              departureDate ||
-                              earliestDeparture
-                            }
-                            value={leg.date}
-                            onChange={(event) => updateLeg(index, "date", event.target.value)}
-                            required
-                          />
-                        </div>
-                      </div>
-                      <button
-                        className="remove-flight-leg"
-                        type="button"
-                        aria-label={`Remove flight ${index + 2}`}
-                        onClick={() =>
-                          setAdditionalLegs((legs) => legs.filter((item) => item.id !== leg.id))
-                        }
-                      >
-                        <X size={17} aria-hidden="true" />
-                      </button>
-                    </div>
-                  ))}
-                  <button
-                    className="add-flight-leg"
-                    type="button"
-                    onClick={() =>
-                      setAdditionalLegs((legs) => [
-                        ...legs,
-                        { id: `${Date.now()}-${legs.length}`, origin: "", destination: "", date: "" },
-                      ])
-                    }
-                  >
-                    <Plus size={15} aria-hidden="true" />
-                    Add another flight
-                  </button>
-                </div>
-              )}
-
-              <div className="flight-search-submit-row">
-                <span className="flight-search-assurance">
-                  <Users size={15} aria-hidden="true" />
-                  Flexible options for your journey
-                </span>
-                <button className="flight-search-submit" type="submit" disabled={!canSearch}>
-                  <Search size={17} aria-hidden="true" />
-                  Search Flights
-                </button>
-              </div>
-              {searchMessage && (
-                <p className="flight-search-message" role="status">
-                  {searchMessage}
-                </p>
-              )}
-            </form>
-          </section>
-
-          <section className="homepage-benefits" aria-labelledby="homepage-benefits-title">
-            <div className="homepage-section-heading">
-              <p className="booking-eyebrow">TRAVEL, MADE CLEARER</p>
-              <h2 id="homepage-benefits-title">The details that make planning easier.</h2>
-              <p>Helpful options and clear information, from your first search to takeoff.</p>
-            </div>
-            <div className="homepage-benefit-grid">
-              <article className="homepage-benefit-card">
-                <span className="homepage-benefit-icon benefit-icon-lilac"><TicketCheck size={20} aria-hidden="true" /></span>
-                <h3>Compare in one place</h3>
-                <p>Review schedules, stops, airlines, and fares together to find the trip that suits you.</p>
-              </article>
-              <article className="homepage-benefit-card">
-                <span className="homepage-benefit-icon benefit-icon-green"><BadgeCheck size={20} aria-hidden="true" /></span>
-                <h3>Know what your fare includes</h3>
-                <p>Check baggage and fare details before continuing with your flight selection.</p>
-              </article>
-              <article className="homepage-benefit-card">
-                <span className="homepage-benefit-icon benefit-icon-blue"><ShieldCheck size={20} aria-hidden="true" /></span>
-                <h3>Simple booking steps</h3>
-                <p>Follow a clear path from flight details to passenger information and confirmation.</p>
-              </article>
-              <article className="homepage-benefit-card">
-                <span className="homepage-benefit-icon benefit-icon-amber"><Headphones size={20} aria-hidden="true" /></span>
-                <h3>Support when you need it</h3>
-                <p>Our team can help with questions as you plan your next journey.</p>
-              </article>
-            </div>
-          </section>
-
-          <section className="homepage-deals" aria-labelledby="homepage-deals-title">
-            <div className="homepage-section-heading homepage-section-heading-row">
-              <div>
-                <p className="booking-eyebrow">A LITTLE INSPIRATION</p>
-                <h2 id="homepage-deals-title">Sample fares to get you going.</h2>
-                <p>Explore a few popular routes and compare the available flights.</p>
-              </div>
-              <button className="homepage-text-link" type="button" onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}>
-                Build your own search <ArrowUpRight size={15} aria-hidden="true" />
-              </button>
-            </div>
-            <div className="homepage-deal-grid">
-              {homepageDeals.map((deal) => (
-                <article className="homepage-deal-card" key={`${deal.origin}-${deal.destination}`}>
-                  <div className="homepage-deal-image" style={{ backgroundImage: `linear-gradient(180deg, transparent 42%, rgba(12, 18, 26, 0.62)), url(${deal.image})` }}>
-                    <span>{deal.country}</span>
-                  </div>
-                  <div className="homepage-deal-info">
-                    <div><h3>{deal.city}</h3><p>{deal.origin.split(" (")[0]} <ArrowRight size={13} aria-hidden="true" /> {deal.city}</p></div>
-                    <div className="homepage-deal-price"><small>Sample one-way fares from</small><strong>${deal.price}</strong></div>
-                  </div>
-                  <button type="button" onClick={() => searchHomepageDeal(deal)}>Explore flights <ArrowRight size={14} aria-hidden="true" /></button>
-                </article>
-              ))}
-            </div>
-            <p className="homepage-deals-note">Sample prices are for demonstration and may not reflect live fares.</p>
-          </section>
-
-          <section className="destination-grid" id="destinations">
-            {destinations.map((destination, index) => (
-              <a
-                key={`${destination.city}-${index}`}
-                className="destination-card-link"
-                href={destination.href || "#booking"}
-                target={destination.href ? "_blank" : undefined}
-                rel={destination.href ? "noreferrer" : undefined}
-              >
-                <article
-                  className="destination-card"
-                  style={{
-                    backgroundImage: `linear-gradient(180deg, rgba(18, 27, 39, 0.14), rgba(10, 10, 15, 0.72)), url(${destination.image})`,
-                  }}
-                >
-                  <div className="card-tag">
-                    <Plane size={12} />
-                    Flights
-                  </div>
-
-                  <div className="card-info">
-                    <span className="destination-rating-empty">No ratings yet</span>
-                    <h3>{destination.city}</h3>
-                    <p>{destination.text}</p>
-                  </div>
-                </article>
-              </a>
-            ))}
           </section>
 
           <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
@@ -699,15 +373,15 @@ function BookingWebsite() {
                 <h2 id="travel-services-title">Make the whole trip yours.</h2>
                 <p>We’re working on a few more ways to make travel planning easier.</p>
               </div>
-              <Link className="homepage-text-link" to="/flights/search">
-                Search flights <ArrowUpRight size={15} aria-hidden="true" />
+              <Link className="homepage-text-link" to="#destinations">
+                Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
               </Link>
             </div>
             <div className="homepage-service-grid">
-              <article className="homepage-service-card">
+              <article className="homepage-service-card homepage-service-hotel">
                 <div
                   className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=900&q=80)" }}
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
                   <span className="homepage-service-status">Coming soon</span>
@@ -717,79 +391,364 @@ function BookingWebsite() {
                   <p>Discover welcoming hotels and stays to make every stop feel like part of the adventure.</p>
                 </div>
               </article>
-              <article className="homepage-service-card">
+              <article className="homepage-service-card homepage-service-car">
                 <div
                   className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=900&q=80)" }}
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.48)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
                   <span className="homepage-service-status">Coming soon</span>
                 </div>
                 <div className="homepage-service-copy">
-                  <h3>Get around your way</h3>
-                  <p>Plan ahead with car rental options for city drives, scenic routes, and everything between.</p>
+                  <h3>Find your perfect drive</h3>
+                  <p>From compact city cars to roomy road-trip rides, pick up the keys and explore at your own pace.</p>
                 </div>
               </article>
-              <article className="homepage-service-card">
+              <article className="homepage-service-card homepage-service-transfer">
                 <div
                   className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1511919884226-fd3cad34687c?auto=format&fit=crop&w=900&q=80)" }}
+                  style={{ backgroundImage: "linear-gradient(180deg, rgba(15, 22, 29, 0.08), rgba(15, 22, 29, 0.62)), url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
                   <span className="homepage-service-status">Coming soon</span>
                 </div>
                 <div className="homepage-service-copy">
-                  <h3>Arrive with ease</h3>
-                  <p>Airport transfers and local rides will help connect the little details of your journey.</p>
+                  <h3>From runway to roadway</h3>
+                  <p>Airport pickups and local transfers to make every connection feel effortless.</p>
                 </div>
               </article>
             </div>
           </section>
 
-          <section className="stats" id="about">
-            <div className="stat-item">
-              <strong>0</strong>
-              <span>Happy travelers</span>
-            </div>
-            <div className="stat-item">
-              <strong>0.0/5</strong>
-              <span>Average guest rating</span>
-            </div>
-            <div className="stat-item">
-              <strong>0</strong>
-              <span>Destinations to discover</span>
-            </div>
-            <div className="stat-item">
-              <strong>0</strong>
-              <span>Countries served</span>
-            </div>
-          </section>
-
           <section className="homepage-testimonials" aria-labelledby="homepage-testimonials-title">
             <div className="homepage-section-heading">
-              <p className="booking-eyebrow">NOTES FROM THE JOURNEY</p>
-              <h2 id="homepage-testimonials-title">Traveler reviews</h2>
+              <p className="booking-eyebrow">SHARE YOUR EXPERIENCE</p>
+              <h2 id="homepage-testimonials-title">Write a traveler review</h2>
+              <p>Tell others what made your journey memorable.</p>
             </div>
-            <p className="homepage-no-reviews">No reviews or ratings yet. Check back after our first trips.</p>
+            <form
+              className="homepage-review-form"
+              onSubmit={submitTravelerReview}
+            >
+              <div className="homepage-review-fields">
+                <label className="homepage-review-field">
+                  <span>Your name</span>
+                  <input
+                    autoComplete="name"
+                    maxLength={60}
+                    onChange={(event) => setReviewAuthor(event.target.value)}
+                    placeholder="e.g. Alex Morgan"
+                    required
+                    value={reviewAuthor}
+                  />
+                </label>
+                <label className="homepage-review-field">
+                  <span>Destination</span>
+                  <input
+                    maxLength={80}
+                    onChange={(event) => setReviewDestination(event.target.value)}
+                    placeholder="Where did you travel?"
+                    required
+                    value={reviewDestination}
+                  />
+                </label>
+                <label className="homepage-review-field">
+                  <span>Your rating</span>
+                  <select
+                    onChange={(event) => setReviewRating(event.target.value)}
+                    value={reviewRating}
+                  >
+                    <option value="5">5 — Excellent</option>
+                    <option value="4">4 — Very good</option>
+                    <option value="3">3 — Good</option>
+                    <option value="2">2 — Fair</option>
+                    <option value="1">1 — Needs improvement</option>
+                  </select>
+                </label>
+                <label className="homepage-review-field homepage-review-field-message">
+                  <span>Your review</span>
+                  <textarea
+                    maxLength={1000}
+                    onChange={(event) => setReviewText(event.target.value)}
+                    placeholder="Share a little about your travel experience..."
+                    required
+                    rows={4}
+                    value={reviewText}
+                  />
+                </label>
+              </div>
+              <div className="homepage-review-submit-row">
+                <p>Reviews are kept in this page session and are not saved.</p>
+                <button className="homepage-review-submit" type="submit">
+                  Submit review <ArrowRight size={16} aria-hidden="true" />
+                </button>
+              </div>
+              {reviewStatus && <p className="homepage-review-status" role="status">{reviewStatus}</p>}
+            </form>
+            {travelerReviews.length > 0 && (
+              <div className="homepage-review-grid" aria-label="Reviews submitted this session">
+                {travelerReviews.map((review) => (
+                  <article className="homepage-review-card" key={review.id}>
+                    <div className="homepage-review-rating" aria-label={`${review.rating} out of 5 stars`}>
+                      {Array.from({ length: review.rating }, (_, index) => (
+                        <Star key={index} size={15} fill="currentColor" aria-hidden="true" />
+                      ))}
+                    </div>
+                    <p className="homepage-review-text">“{review.text}”</p>
+                    <div className="homepage-review-footer">
+                      <span className="homepage-review-avatar" aria-hidden="true">
+                        {review.author.charAt(0).toUpperCase()}
+                      </span>
+                      <span>
+                        <strong>{review.author}</strong>
+                        <small>{review.destination}</small>
+                      </span>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            )}
           </section>
 
-          <section className="homepage-faq" aria-labelledby="homepage-faq-title">
-            <div className="homepage-section-heading">
-              <p className="booking-eyebrow">GOOD TO KNOW</p>
-              <h2 id="homepage-faq-title">A few helpful answers.</h2>
+          <section className="home-extra-section home-popular-destinations" id="destinations" aria-labelledby="home-popular-destinations-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">A PLACE TO BEGIN</p>
+              <h2 id="home-popular-destinations-title">Explore the world</h2>
+              <p>Find a place that fits the kind of journey you want to take.</p>
             </div>
-            <div className="homepage-faq-list">
-              {homepageFaqs.map((faq) => (
-                <details className="homepage-faq-item" key={faq.question}>
-                  <summary>{faq.question}</summary>
-                  <p>{faq.answer}</p>
-                </details>
+            <div className="home-destination-carousel">
+              <button
+                className="home-destination-scroll-button home-destination-scroll-previous"
+                type="button"
+                aria-label="Scroll to previous destinations"
+                onClick={() => scrollDestinations(-1)}
+              >
+                <ChevronLeft size={21} aria-hidden="true" />
+              </button>
+              <div
+                className="home-destination-marquee"
+                role="region"
+                aria-label="Popular destinations"
+                tabIndex={0}
+                ref={destinationScroller}
+              >
+                <div className="home-destination-track">
+                  {popularDestinations.map((destination) => (
+                    <article
+                      className="home-destination-card"
+                      key={destination.city}
+                      style={{
+                        backgroundImage: `linear-gradient(180deg, rgba(10, 16, 22, 0.04) 18%, rgba(10, 16, 22, 0.78) 100%), url(${destination.image})`,
+                      }}
+                    >
+                      <span className="home-destination-country">{destination.country}</span>
+                      <div className="home-destination-copy">
+                        <h3>{destination.city}</h3>
+                        <p>{destination.description}</p>
+                        <span className="home-destination-best-for">Best for: {destination.bestFor}</span>
+                        <Link to="#destinations">
+                          Explore <ArrowRight size={14} aria-hidden="true" />
+                        </Link>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              </div>
+              <button
+                className="home-destination-scroll-button home-destination-scroll-next"
+                type="button"
+                aria-label="Scroll to more destinations"
+                onClick={() => scrollDestinations(1)}
+              >
+                <ChevronRight size={21} aria-hidden="true" />
+              </button>
+            </div>
+          </section>
+
+          <section className="home-extra-section home-holiday-packages" aria-labelledby="home-holiday-packages-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">CURATED GETAWAYS</p>
+              <h2 id="home-holiday-packages-title">Popular holiday packages</h2>
+              <p>Thoughtfully planned stays to help make every day of your trip count.</p>
+            </div>
+            <div className="home-package-grid">
+              {holidayPackages.map((holiday) => (
+                <article className="home-package-card" key={holiday.name}>
+                  <div
+                    className="home-package-image"
+                    style={{ backgroundImage: `linear-gradient(180deg, transparent 34%, rgba(10, 16, 22, 0.68)), url(${holiday.image})` }}
+                    role="img"
+                    aria-label={holiday.destination}
+                  >
+                    <span>{holiday.type}</span>
+                  </div>
+                  <div className="home-package-copy">
+                    <p className="home-package-duration">{holiday.duration}</p>
+                    <h3>{holiday.name}</h3>
+                    <p className="home-package-destination">{holiday.destination}</p>
+                    <p className="home-package-description">{holiday.description}</p>
+                    <div className="home-package-footer">
+                      <a href="#travel-interests">View package <ArrowRight size={14} aria-hidden="true" /></a>
+                    </div>
+                  </div>
+                </article>
               ))}
+            </div>
+          </section>
+
+          <section className="home-extra-section home-travel-interests" id="travel-interests" aria-labelledby="home-travel-interests-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">YOUR TRIP, YOUR WAY</p>
+              <h2 id="home-travel-interests-title">Travel your way</h2>
+              <p>Choose what inspires you to see matching holiday ideas.</p>
+            </div>
+            <div className="home-interest-tabs" role="group" aria-label="Filter trips by interest">
+              {travelInterests.map(({ label, icon: Icon }) => (
+                <button
+                  className={`home-interest-tab${selectedInterest === label ? " is-selected" : ""}`}
+                  key={label}
+                  type="button"
+                  aria-pressed={selectedInterest === label}
+                  onClick={() => setSelectedInterest(label)}
+                >
+                  <Icon size={17} aria-hidden="true" />
+                  {label}
+                </button>
+              ))}
+            </div>
+            <div className="home-interest-results" aria-live="polite">
+              <h3>{selectedInterest} ideas</h3>
+              <div className="home-interest-package-list">
+                {holidayPackages
+                  .filter((holiday) => holiday.interests.includes(selectedInterest))
+                  .map((holiday) => (
+                    <article className="home-interest-package" key={holiday.name}>
+                      <img src={holiday.image} alt="" />
+                      <span><strong>{holiday.name}</strong><small>{holiday.destination} · {holiday.duration}</small></span>
+                      <a href="#home-holiday-packages-title" aria-label={`View ${holiday.name} package`}>
+                        View <ArrowRight size={14} aria-hidden="true" />
+                      </a>
+                    </article>
+                  ))}
+              </div>
+            </div>
+          </section>
+
+          <section className="home-extra-section home-travel-experiences" aria-labelledby="home-travel-experiences-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">MAKE MEMORIES ALONG THE WAY</p>
+              <h2 id="home-travel-experiences-title">Experiences you’ll remember</h2>
+              <p>Discover the moments, places, and local experiences that bring a trip to life.</p>
+            </div>
+            <div className="home-experience-grid">
+              {travelExperiences.map((experience) => (
+                <article className="home-experience-card" key={experience.name}>
+                  <div
+                    className="home-experience-image"
+                    style={{ backgroundImage: `linear-gradient(180deg, transparent 35%, rgba(10, 16, 22, 0.68)), url(${experience.image})` }}
+                    role="img"
+                    aria-label={experience.name}
+                  >
+                    <span><MapPin size={13} aria-hidden="true" />{experience.location}</span>
+                  </div>
+                  <div className="home-experience-copy">
+                    <h3>{experience.name}</h3>
+                    <p>{experience.description}</p>
+                    <a href="#travel-interests">Explore <ArrowRight size={14} aria-hidden="true" /></a>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="home-extra-section home-agency-benefits" id="about" aria-labelledby="home-agency-benefits-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">YOUR TRAVEL PARTNER</p>
+              <h2 id="home-agency-benefits-title">Why choose our travel agency</h2>
+              <p>Support for the whole journey, from the first idea to the details along the way.</p>
+            </div>
+            <div className="home-agency-benefit-grid">
+              {agencyBenefits.map(({ title, description, icon: Icon }) => (
+                <article className="home-agency-benefit-card" key={title}>
+                  <span><Icon size={19} aria-hidden="true" /></span>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="home-extra-cta" aria-labelledby="home-extra-cta-title">
+            <div>
+              <p className="booking-eyebrow">YOUR NEXT CHAPTER</p>
+              <h2 id="home-extra-cta-title">Ready for your next adventure?</h2>
+              <p>Discover a new place and start imagining your next journey.</p>
+            </div>
+            <Link to="#destinations">Explore destinations <ArrowRight size={16} aria-hidden="true" /></Link>
+          </section>
+
+          <section className="home-extra-section home-seasonal-destinations" aria-labelledby="home-seasonal-destinations-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">IN SEASON, INSPIRING</p>
+              <h2 id="home-seasonal-destinations-title">Seasonal destinations</h2>
+              <p>Find a little inspiration for the kind of getaway that sounds right now.</p>
+            </div>
+            <div className="home-seasonal-carousel" aria-roledescription="carousel" aria-label="Seasonal destination inspiration">
+              <article className="home-seasonal-banner" key={seasonalDestination.season}>
+                <img
+                  className="home-seasonal-banner-image"
+                  src={seasonalDestination.image}
+                  alt={`${seasonalDestination.city}, ${seasonalDestination.country}`}
+                />
+                <div className="home-seasonal-banner-content" aria-live="polite">
+                  <span className="home-seasonal-banner-season">{seasonalDestination.season}</span>
+                  <h3>{seasonalDestination.city}</h3>
+                  <p className="home-seasonal-banner-country">{seasonalDestination.country}</p>
+                  <p className="home-seasonal-banner-description">{seasonalDestination.description}</p>
+                  <button
+                    className="home-seasonal-explore"
+                    type="button"
+                    onClick={() => document.getElementById("destinations")?.scrollIntoView({ behavior: "smooth" })}
+                  >
+                    Explore destination <ArrowRight size={16} aria-hidden="true" />
+                  </button>
+                </div>
+                <div className="home-seasonal-controls">
+                  <button
+                    className="home-seasonal-arrow"
+                    type="button"
+                    aria-label="Previous seasonal destination"
+                    onClick={() => showSeasonalDestination(-1)}
+                  >
+                    <ChevronLeft size={21} aria-hidden="true" />
+                  </button>
+                  <div className="home-seasonal-pagination" aria-label={`Slide ${seasonalIndex + 1} of ${seasonalDestinations.length}`}>
+                    {seasonalDestinations.map((destination, index) => (
+                      <button
+                        className={`home-seasonal-dot${index === seasonalIndex ? " is-active" : ""}`}
+                        key={destination.season}
+                        type="button"
+                        aria-label={`Show ${destination.season} destination`}
+                        aria-current={index === seasonalIndex ? "true" : undefined}
+                        onClick={() => setSeasonalIndex(index)}
+                      />
+                    ))}
+                  </div>
+                  <button
+                    className="home-seasonal-arrow"
+                    type="button"
+                    aria-label="Next seasonal destination"
+                    onClick={() => showSeasonalDestination(1)}
+                  >
+                    <ChevronRight size={21} aria-hidden="true" />
+                  </button>
+                </div>
+              </article>
             </div>
           </section>
         </main>
 
-        <div className="footer-gallery" aria-label="Flight and destination photos">
+        <div className="footer-gallery" aria-label="Travel and destination photos">
           <div className="footer-gallery-track">
             {[false, true].map((isDuplicate) => (
               <div
@@ -814,8 +773,8 @@ function BookingWebsite() {
               <p className="footer-eyebrow">YOUR NEXT ADVENTURE STARTS HERE</p>
               <h2>Ready to explore somewhere new?</h2>
             </div>
-            <a className="footer-cta-link" href="#booking">
-              Plan your trip <ArrowUpRight size={17} aria-hidden="true" />
+            <a className="footer-cta-link" href="#destinations">
+              Explore destinations <ArrowUpRight size={17} aria-hidden="true" />
             </a>
           </div>
 
@@ -834,7 +793,7 @@ function BookingWebsite() {
             <nav className="footer-column" aria-label="Explore">
               <h3>Explore</h3>
               <a href="#destinations">Top destinations</a>
-              <a href="#booking">Find a flight</a>
+              <a href="#destinations">Discover destinations</a>
               <a href="#home">Travel inspiration</a>
             </nav>
 
@@ -842,12 +801,12 @@ function BookingWebsite() {
               <h3>Company</h3>
               <a href="#about">About us</a>
               <a href="#destinations">Our destinations</a>
-              <a href="#booking">Plan your journey</a>
+              <a href="#destinations">Plan your journey</a>
             </nav>
 
             <nav className="footer-column" aria-label="Travel help">
               <h3>Travel help</h3>
-              <a href="#booking">Booking options</a>
+              <a href="#travel-services">Travel services</a>
               <a href="#travel-services">Hotels and car rentals</a>
               <a href="#travel-services">Airport transfers</a>
               <a href="#home">Back to top</a>
@@ -869,30 +828,23 @@ function BookingWebsite() {
 function App() {
   return (
     <AuthProvider>
-      <FlightBookingProvider>
-        <Routes>
-          <Route path="/" element={<BookingWebsite />} />
-          <Route path="/admin/setup" element={<AuthPage />} />
-          <Route path="/admin/sign-in" element={<AuthPage />} />
-          <Route path="/flights/search" element={<FlightSearch />} />
-          <Route path="/flights/results" element={<FlightResults />} />
-          <Route path="/flights/details/:flightId" element={<FlightDetails />} />
-          <Route path="/flights/passengers" element={<PassengerDetails />} />
-          <Route path="/flights/confirmation/:bookingId" element={<BookingConfirmation />} />
-          <Route path="/dashboard" element={<DashboardLayout />}>
-            <Route index element={<Navigate to="overview" replace />} />
-            <Route path="overview" element={<Dashboard />} />
-            <Route path="bookings" element={<Bookings />} />
-            <Route path="bookings/:bookingId" element={<BookingDetails />} />
-            <Route path="analytics" element={<Analytics />} />
-            <Route path="upcoming" element={<UpcomingTrips />} />
-            <Route path="guests" element={<Guests />} />
-            <Route path="guests/:guestId" element={<Guests />} />
-            <Route path="settings" element={<Settings />} />
-          </Route>
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-      </FlightBookingProvider>
+      <Routes>
+        <Route path="/" element={<BookingWebsite />} />
+        <Route path="/admin/setup" element={<AuthPage />} />
+        <Route path="/admin/sign-in" element={<AuthPage />} />
+        <Route path="/dashboard" element={<DashboardLayout />}>
+          <Route index element={<Navigate to="overview" replace />} />
+          <Route path="overview" element={<Dashboard />} />
+          <Route path="bookings" element={<Bookings />} />
+          <Route path="bookings/:bookingId" element={<BookingDetails />} />
+          <Route path="analytics" element={<Analytics />} />
+          <Route path="upcoming" element={<UpcomingTrips />} />
+          <Route path="guests" element={<Guests />} />
+          <Route path="guests/:guestId" element={<Guests />} />
+          <Route path="settings" element={<Settings />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
     </AuthProvider>
   );
 }

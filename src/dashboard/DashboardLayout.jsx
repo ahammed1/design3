@@ -18,7 +18,6 @@ import {
 } from "lucide-react";
 import { Link, Navigate, NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/authStore.js";
-import { useFlightBooking } from "../flights/flightBookingStore.js";
 import "./Dashboard.css";
 
 const navigation = [
@@ -46,8 +45,8 @@ function DashboardLayout() {
   const [notificationsOpen, setNotificationsOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
   const [globalSearch, setGlobalSearch] = useState("");
+  const [bookings, setBookings] = useState([]);
   const [signOutError, setSignOutError] = useState("");
-  const { bookings, setBookings } = useFlightBooking();
   const { isAdmin, loading, signOut, user } = useAuth();
   const location = useLocation();
   const navigate = useNavigate();
