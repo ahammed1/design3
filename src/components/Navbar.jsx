@@ -5,10 +5,12 @@ import "./Navbar.css";
 
 const navItems = [
   { label: "Home", href: "#home" },
-  { label: "Admin", to: "/admin/sign-in" },
   { label: "Destinations", href: "#destinations" },
-  { label: "Stay & Go", href: "#travel-services" },
+  { label: "Packages", href: "#popular-packages" },
+  { label: "Experiences", href: "#experiences" },
+  { label: "Services", href: "#travel-services" },
   { label: "About", href: "#about" },
+  { label: "Admin", to: "/admin/sign-in" },
 ];
 
 function Navbar() {
@@ -50,8 +52,8 @@ function Navbar() {
             <a key={item.href} href={item.href} onClick={closeMenu}>{item.label}</a>
           ))}
         </div>
-        <a className="navbar-cta" href="#destinations" onClick={closeMenu}>
-          Explore destinations
+        <a className="navbar-cta" href="#home-trip-planner" onClick={closeMenu}>
+          Plan a trip
         </a>
       </nav>
     </header>

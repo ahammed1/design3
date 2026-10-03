@@ -95,6 +95,9 @@ const popularDestinations = [
     country: "United Arab Emirates",
     description: "A striking mix of desert calm and city energy.",
     bestFor: "Luxury & family breaks",
+    bestSeason: "November – March",
+    featuredExperience: "Desert safari",
+    packageAvailability: "Curated stays and tours",
     interests: ["Luxury escapes", "Family trips", "Culture & heritage"],
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=780&q=78",
   },
@@ -103,6 +106,9 @@ const popularDestinations = [
     country: "Maldives",
     description: "Turquoise lagoons, quiet islands, and slow days by the sea.",
     bestFor: "Beach & honeymoon",
+    bestSeason: "November – April",
+    featuredExperience: "Island experience",
+    packageAvailability: "Island packages",
     interests: ["Beach holidays", "Honeymoon", "Luxury escapes"],
     image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=780&q=78",
   },
@@ -111,6 +117,9 @@ const popularDestinations = [
     country: "Indonesia",
     description: "Green landscapes, island air, and room to unwind.",
     bestFor: "Culture & couples",
+    bestSeason: "April – October",
+    featuredExperience: "Temple and village visits",
+    packageAvailability: "Culture and beach stays",
     interests: ["Beach holidays", "Honeymoon", "Adventure", "Culture & heritage"],
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=780&q=78",
   },
@@ -119,6 +128,9 @@ const popularDestinations = [
     country: "France",
     description: "Slow mornings, grand avenues, and little cafés.",
     bestFor: "Culture & couples",
+    bestSeason: "April – June",
+    featuredExperience: "Neighbourhood city tour",
+    packageAvailability: "City-break packages",
     interests: ["Honeymoon", "Luxury escapes", "Culture & heritage"],
     image: "https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=780&q=78",
   },
@@ -127,6 +139,9 @@ const popularDestinations = [
     country: "Switzerland",
     description: "Alpine scenery, lakeside towns, and scenic rail journeys.",
     bestFor: "Adventure & family",
+    bestSeason: "June – September",
+    featuredExperience: "Scenic mountain rail",
+    packageAvailability: "Alpine itineraries",
     interests: ["Adventure", "Family trips", "Luxury escapes"],
     image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=780&q=78",
   },
@@ -135,6 +150,9 @@ const popularDestinations = [
     country: "Singapore",
     description: "Waterfront gardens, delicious food, and lively city days.",
     bestFor: "Family & city breaks",
+    bestSeason: "February – April",
+    featuredExperience: "Gardens by the Bay",
+    packageAvailability: "City and family stays",
     interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
     image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=780&q=78",
   },
@@ -143,6 +161,9 @@ const popularDestinations = [
     country: "Thailand",
     description: "Island escapes, vivid markets, and rich local traditions.",
     bestFor: "Beach & adventure",
+    bestSeason: "November – February",
+    featuredExperience: "Island hopping",
+    packageAvailability: "Beach and culture trips",
     interests: ["Beach holidays", "Adventure", "Culture & heritage"],
     image: "https://images.unsplash.com/photo-1528181304800-259b08848526?auto=format&fit=crop&w=780&q=78",
   },
@@ -151,6 +172,9 @@ const popularDestinations = [
     country: "United Kingdom",
     description: "Historic corners and a different plan every day.",
     bestFor: "Family & culture",
+    bestSeason: "May – September",
+    featuredExperience: "Historic city walk",
+    packageAvailability: "Guided city breaks",
     interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
     image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=780&q=78",
   },
@@ -160,8 +184,14 @@ const holidayPackages = [
   {
     name: "Dubai Escape",
     destination: "Dubai, United Arab Emirates",
+    destinationCity: "Dubai",
     duration: "4 Nights / 5 Days",
+    nights: 4,
     type: "Luxury",
+    budgetStyle: ["Comfort-first", "Premium"],
+    stay: "Sample 4-night city hotel stay",
+    activities: ["Desert safari", "Guided city tour"],
+    inclusions: ["Hotel stay", "Desert safari", "Guided city tour", "Airport transfer"],
     interests: ["Luxury escapes", "Family trips", "Culture & heritage"],
     description: "A city stay with landmark views, desert discovery, and time to unwind.",
     image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
@@ -169,8 +199,14 @@ const holidayPackages = [
   {
     name: "Maldives Paradise",
     destination: "Maldives",
+    destinationCity: "Maldives",
     duration: "3 Nights / 4 Days",
+    nights: 3,
     type: "Honeymoon",
+    budgetStyle: ["Premium"],
+    stay: "Sample 3-night island resort stay",
+    activities: ["Island experience"],
+    inclusions: ["Island resort stay", "Island experience", "Leisure time", "Arrival transfer"],
     interests: ["Beach holidays", "Honeymoon", "Luxury escapes"],
     description: "An island retreat with blue-water views and unhurried beach days.",
     image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80",
@@ -178,8 +214,14 @@ const holidayPackages = [
   {
     name: "Bali Experience",
     destination: "Bali, Indonesia",
+    destinationCity: "Bali",
     duration: "5 Nights / 6 Days",
+    nights: 5,
     type: "Cultural",
+    budgetStyle: ["Value-conscious", "Comfort-first"],
+    stay: "Sample 5-night boutique stay",
+    activities: ["Temple visit", "Local cultural experience"],
+    inclusions: ["Boutique hotel stay", "Temple visit", "Local cultural experience", "Airport transfer"],
     interests: ["Beach holidays", "Honeymoon", "Adventure", "Culture & heritage"],
     description: "Explore lush landscapes, local traditions, and beautiful island shores.",
     image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
@@ -187,11 +229,110 @@ const holidayPackages = [
   {
     name: "Swiss Adventure",
     destination: "Switzerland",
+    destinationCity: "Switzerland",
     duration: "6 Nights / 7 Days",
+    nights: 6,
     type: "Adventure",
+    budgetStyle: ["Comfort-first", "Premium"],
+    stay: "Sample 6-night alpine hotel stay",
+    activities: ["Mountain excursion", "Scenic rail experience"],
+    inclusions: ["Alpine hotel stay", "Mountain excursion", "Scenic rail experience", "Local transfers"],
     interests: ["Adventure", "Family trips", "Luxury escapes"],
     description: "Discover mountain scenery, lakeside towns, and memorable alpine journeys.",
     image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80",
+  },
+];
+
+const tripPlannerStyles = [
+  "Beach",
+  "Adventure",
+  "Luxury",
+  "Honeymoon",
+  "Family",
+  "Culture",
+];
+
+const tripPlannerBudgetStyles = [
+  "Flexible",
+  "Value-conscious",
+  "Comfort-first",
+  "Premium",
+];
+
+const defaultTripPlanner = {
+  destination: "Any destination",
+  style: "Any style",
+  duration: "Any duration",
+  travelers: "2",
+  budget: "Flexible",
+};
+
+const additionalTravelServices = [
+  {
+    title: "Private tours",
+    description: "Explore with a local guide and a pace that suits your day.",
+    icon: Compass,
+    action: "Browse experiences",
+    href: "#experiences",
+  },
+  {
+    title: "Local experiences",
+    description: "Add food, culture, and one-of-a-kind moments to your itinerary.",
+    icon: MapPin,
+    action: "Explore experiences",
+    href: "#experiences",
+  },
+  {
+    title: "Custom itineraries",
+    description: "Bring your ideas together into a journey shaped around you.",
+    icon: WandSparkles,
+    action: "Plan your trip",
+    href: "#home-trip-planner",
+  },
+  {
+    title: "Travel assistance",
+    description: "Get practical guidance while you prepare for your journey.",
+    icon: LifeBuoy,
+    action: "Plan with us",
+    href: "#home-trip-planner",
+  },
+];
+
+const travelGuides = [
+  {
+    title: "5 days in Bali",
+    destination: "Bali, Indonesia",
+    description: "Balance temple visits, island scenery, local food, and time to slow down.",
+    image: "https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=900&q=80",
+    guide: "Begin with a few nights near Ubud for temples, green landscapes, and local craft. Leave room for a coast-side stay, a relaxed beach day, and an evening discovering Balinese food. Travel times vary, so avoid packing every stop into one day.",
+  },
+  {
+    title: "A weekend escape to Dubai",
+    destination: "Dubai, United Arab Emirates",
+    description: "Pair city landmarks with an unhurried desert evening.",
+    image: "https://images.unsplash.com/photo-1512453979798-5ea266f8880c?auto=format&fit=crop&w=900&q=80",
+    guide: "Choose a central base to make a short stay easier. Set aside time for one neighbourhood or landmark each day, and consider a desert experience in the evening. Check transfer times and activity inclusions before confirming plans.",
+  },
+  {
+    title: "A first-time guide to Switzerland",
+    destination: "Switzerland",
+    description: "Plan scenic rail journeys, mountain days, and relaxed lakeside stops.",
+    image: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?auto=format&fit=crop&w=900&q=80",
+    guide: "Choose fewer bases and connect them by rail to keep the itinerary comfortable. Check seasonal access for mountain excursions, allow time for weather changes, and compare transport passes with the routes you expect to take.",
+  },
+  {
+    title: "A romantic Maldives getaway",
+    destination: "Maldives",
+    description: "Find time for island views, calm water, and slow days together.",
+    image: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?auto=format&fit=crop&w=900&q=80",
+    guide: "Compare island transfer arrangements, meal plans, and room details before choosing a stay. Build in unscheduled time between water activities, and confirm what is included with each experience and transfer.",
+  },
+  {
+    title: "A family adventure in Singapore",
+    destination: "Singapore",
+    description: "Mix gardens, easy city exploring, and breaks for every age.",
+    image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=900&q=80",
+    guide: "Group nearby sights together and keep flexible breaks in the day. Check opening times, accessibility, and child-friendly options ahead of time, and choose accommodation with convenient transport connections.",
   },
 ];
 
@@ -268,8 +409,10 @@ const agencyBenefits = [
 
 function BookingWebsite() {
   const destinationScroller = useRef(null);
+  const tripPlannerRef = useRef(null);
   const [seasonalIndex, setSeasonalIndex] = useState(0);
   const [selectedInterest, setSelectedInterest] = useState(travelInterests[0].label);
+  const [planner, setPlanner] = useState(defaultTripPlanner);
   const [travelerReviews, setTravelerReviews] = useState([]);
   const [reviewAuthor, setReviewAuthor] = useState("");
   const [reviewDestination, setReviewDestination] = useState("");
@@ -277,6 +420,46 @@ function BookingWebsite() {
   const [reviewText, setReviewText] = useState("");
   const [reviewStatus, setReviewStatus] = useState("");
   const seasonalDestination = seasonalDestinations[seasonalIndex];
+  const plannerSuggestions = holidayPackages.filter((holiday) => {
+    const matchesDestination =
+      planner.destination === "Any destination" || holiday.destinationCity === planner.destination;
+    const plannerInterest = {
+      Beach: "Beach holidays",
+      Luxury: "Luxury escapes",
+      Family: "Family trips",
+      Culture: "Culture & heritage",
+    }[planner.style] || planner.style;
+    const matchesStyle =
+      planner.style === "Any style" ||
+      holiday.interests.includes(plannerInterest) ||
+      holiday.type.toLowerCase() === planner.style.toLowerCase();
+    const matchesDuration =
+      planner.duration === "Any duration" ||
+      (planner.duration === "3–4 nights" && holiday.nights >= 3 && holiday.nights <= 4) ||
+      (planner.duration === "5–7 nights" && holiday.nights >= 5 && holiday.nights <= 7);
+    const matchesBudget =
+      planner.budget === "Flexible" || holiday.budgetStyle.includes(planner.budget);
+    return matchesDestination && matchesStyle && matchesDuration && matchesBudget;
+  });
+
+  function updatePlanner(field, value) {
+    setPlanner((current) => ({ ...current, [field]: value }));
+  }
+
+  function focusTripPlanner() {
+    tripPlannerRef.current?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+
+  function planPackage(holiday) {
+    setPlanner((current) => ({
+      ...current,
+      destination: holiday.destinationCity,
+      style: "Any style",
+      duration: "Any duration",
+      budget: "Flexible",
+    }));
+    focusTripPlanner();
+  }
 
   function scrollDestinations(direction) {
     const scroller = destinationScroller.current;
@@ -333,12 +516,12 @@ function BookingWebsite() {
 
             <div className="hero-copy">
               <h1>
-                <span className="hero-title-line hero-title-line-left">Fly Smarter,</span>
-                <span className="hero-title-line hero-title-line-right">Explore Further.</span>
+                <span className="hero-title-line hero-title-line-left">Travel Further.</span>
+                <span className="hero-title-line hero-title-line-right">Experience More.</span>
               </h1>
               <p className="hero-description">
-                Elevate your journey with intelligent travel that takes you
-                farther, faster, and with unmatched ease.
+                Discover destinations, thoughtful stays, and memorable experiences
+                in journeys shaped around the way you want to travel.
               </p>
               <button
                 className="primary-btn"
@@ -371,7 +554,7 @@ function BookingWebsite() {
               <div>
                 <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
                 <h2 id="travel-services-title">Make the whole trip yours.</h2>
-                <p>We’re working on a few more ways to make travel planning easier.</p>
+                <p>Bring together the stays, local experiences, and practical details that make a trip feel complete.</p>
               </div>
               <Link className="homepage-text-link" to="#destinations">
                 Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
@@ -384,11 +567,12 @@ function BookingWebsite() {
                   style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Coming soon</span>
+                  <span className="homepage-service-status">Hotels & stays</span>
                 </div>
                 <div className="homepage-service-copy">
-                  <h3>Find a place to stay</h3>
-                  <p>Discover welcoming hotels and stays to make every stop feel like part of the adventure.</p>
+                  <h3>Hotels & stays</h3>
+                  <p>Find a comfortable base for every stop, from boutique hideaways to welcoming city hotels.</p>
+                  <a href="#popular-packages">Explore stay ideas <ArrowRight size={14} aria-hidden="true" /></a>
                 </div>
               </article>
               <article className="homepage-service-card homepage-service-car">
@@ -397,11 +581,12 @@ function BookingWebsite() {
                   style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.48)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Coming soon</span>
+                  <span className="homepage-service-status">Local mobility</span>
                 </div>
                 <div className="homepage-service-copy">
-                  <h3>Find your perfect drive</h3>
-                  <p>From compact city cars to roomy road-trip rides, pick up the keys and explore at your own pace.</p>
+                  <h3>Explore at your own pace</h3>
+                  <p>Consider local car options for scenic road trips, day outings, and places beyond the city centre.</p>
+                  <a href="#home-trip-planner">Plan a journey <ArrowRight size={14} aria-hidden="true" /></a>
                 </div>
               </article>
               <article className="homepage-service-card homepage-service-transfer">
@@ -410,13 +595,26 @@ function BookingWebsite() {
                   style={{ backgroundImage: "linear-gradient(180deg, rgba(15, 22, 29, 0.08), rgba(15, 22, 29, 0.62)), url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=85)" }}
                 >
                   <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Coming soon</span>
+                  <span className="homepage-service-status">Airport transfers</span>
                 </div>
                 <div className="homepage-service-copy">
-                  <h3>From runway to roadway</h3>
-                  <p>Airport pickups and local transfers to make every connection feel effortless.</p>
+                  <h3>Airport transfers</h3>
+                  <p>Plan how you’ll get between the airport, your stay, and the places you want to explore.</p>
+                  <a href="#home-trip-planner">Add to your plans <ArrowRight size={14} aria-hidden="true" /></a>
                 </div>
               </article>
+            </div>
+            <div className="homepage-service-options">
+              {additionalTravelServices.map(({ title, description, icon: Icon, action, href }) => (
+                <article className="homepage-service-option" key={title}>
+                  <span><Icon size={18} aria-hidden="true" /></span>
+                  <div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <a href={href}>{action} <ArrowRight size={13} aria-hidden="true" /></a>
+                  </div>
+                </article>
+              ))}
             </div>
           </section>
 
@@ -546,9 +744,12 @@ function BookingWebsite() {
                         <h3>{destination.city}</h3>
                         <p>{destination.description}</p>
                         <span className="home-destination-best-for">Best for: {destination.bestFor}</span>
-                        <Link to="#destinations">
+                        <span className="home-destination-detail">Best season: {destination.bestSeason}</span>
+                        <span className="home-destination-detail">Featured: {destination.featuredExperience}</span>
+                        <span className="home-destination-detail">{destination.packageAvailability}</span>
+                        <a href="#popular-packages">
                           Explore <ArrowRight size={14} aria-hidden="true" />
-                        </Link>
+                        </a>
                       </div>
                     </article>
                   ))}
@@ -565,7 +766,7 @@ function BookingWebsite() {
             </div>
           </section>
 
-          <section className="home-extra-section home-holiday-packages" aria-labelledby="home-holiday-packages-title">
+          <section className="home-extra-section home-holiday-packages" id="popular-packages" aria-labelledby="home-holiday-packages-title">
             <div className="home-extra-heading">
               <p className="booking-eyebrow">CURATED GETAWAYS</p>
               <h2 id="home-holiday-packages-title">Popular holiday packages</h2>
@@ -587,12 +788,105 @@ function BookingWebsite() {
                     <h3>{holiday.name}</h3>
                     <p className="home-package-destination">{holiday.destination}</p>
                     <p className="home-package-description">{holiday.description}</p>
+                    <p className="home-package-stay"><Hotel size={14} aria-hidden="true" />{holiday.stay}</p>
+                    <p className="home-package-activity-count">{holiday.activities.length} included {holiday.activities.length === 1 ? "activity" : "activities"}</p>
+                    <ul className="home-package-inclusions" aria-label={`${holiday.name} sample inclusions`}>
+                      {holiday.inclusions.map((inclusion) => (
+                        <li key={inclusion}>{inclusion}</li>
+                      ))}
+                    </ul>
+                    <p className="home-package-price"><span>Starting price</span><strong>On request</strong></p>
                     <div className="home-package-footer">
-                      <a href="#travel-interests">View package <ArrowRight size={14} aria-hidden="true" /></a>
+                      <button type="button" onClick={() => planPackage(holiday)}>
+                        View package <ArrowRight size={14} aria-hidden="true" />
+                      </button>
                     </div>
                   </div>
                 </article>
               ))}
+            </div>
+          </section>
+
+          <section className="home-extra-section home-trip-planner" id="home-trip-planner" ref={tripPlannerRef} aria-labelledby="home-trip-planner-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">A FEW DETAILS, A GOOD PLACE TO START</p>
+              <h2 id="home-trip-planner-title">Plan a trip that feels like yours.</h2>
+              <p>Choose what matters to you and explore matching ideas from our sample packages.</p>
+            </div>
+            <div className="home-trip-planner-panel">
+              <div className="home-trip-planner-fields">
+                <label>
+                  Destination
+                  <select value={planner.destination} onChange={(event) => updatePlanner("destination", event.target.value)}>
+                    <option>Any destination</option>
+                    {popularDestinations.map((destination) => (
+                      <option key={destination.city}>{destination.city}</option>
+                    ))}
+                  </select>
+                </label>
+                <label>
+                  Travel style
+                  <select value={planner.style} onChange={(event) => updatePlanner("style", event.target.value)}>
+                    <option>Any style</option>
+                    {tripPlannerStyles.map((style) => <option key={style}>{style}</option>)}
+                  </select>
+                </label>
+                <label>
+                  Duration
+                  <select value={planner.duration} onChange={(event) => updatePlanner("duration", event.target.value)}>
+                    <option>Any duration</option>
+                    <option>3–4 nights</option>
+                    <option>5–7 nights</option>
+                  </select>
+                </label>
+                <label>
+                  Travelers
+                  <select value={planner.travelers} onChange={(event) => updatePlanner("travelers", event.target.value)}>
+                    {Array.from({ length: 8 }, (_, index) => (
+                      <option key={index + 1} value={String(index + 1)}>{index + 1} {index === 0 ? "traveler" : "travelers"}</option>
+                    ))}
+                    <option value="9+">9+ travelers</option>
+                  </select>
+                </label>
+                <label>
+                  Budget preference
+                  <select value={planner.budget} onChange={(event) => updatePlanner("budget", event.target.value)}>
+                    {tripPlannerBudgetStyles.map((budget) => <option key={budget}>{budget}</option>)}
+                  </select>
+                </label>
+              </div>
+              <div className="home-trip-planner-results" aria-live="polite">
+                <div className="home-trip-planner-results-heading">
+                  <div>
+                    <p className="booking-eyebrow">SUGGESTED STARTING POINTS</p>
+                    <h3>Ideas for {planner.travelers} {planner.travelers === "1" ? "traveler" : "travelers"}</h3>
+                  </div>
+                  <span>{plannerSuggestions.length} {plannerSuggestions.length === 1 ? "match" : "matches"}</span>
+                </div>
+                {plannerSuggestions.length > 0 ? (
+                  <div className="home-trip-planner-suggestions">
+                    {plannerSuggestions.map((holiday) => (
+                      <article className="home-trip-planner-suggestion" key={holiday.name}>
+                        <img src={holiday.image} alt="" />
+                        <div>
+                          <span>{holiday.type} · {holiday.duration}</span>
+                          <h4>{holiday.name}</h4>
+                          <p>{holiday.destination}</p>
+                        </div>
+                        <button type="button" onClick={() => planPackage(holiday)}>
+                          View package <ArrowRight size={14} aria-hidden="true" />
+                        </button>
+                      </article>
+                    ))}
+                  </div>
+                ) : (
+                  <div className="home-trip-planner-empty">
+                    <p>No sample package matches every choice yet. Try a broader destination, style, or duration.</p>
+                    <button type="button" onClick={() => setPlanner(defaultTripPlanner)}>Clear selections</button>
+                  </div>
+                )}
+                <p className="home-trip-planner-note">These are frontend demo ideas. Final availability and pricing need to be confirmed.</p>
+              </div>
             </div>
           </section>
 
@@ -634,7 +928,7 @@ function BookingWebsite() {
             </div>
           </section>
 
-          <section className="home-extra-section home-travel-experiences" aria-labelledby="home-travel-experiences-title">
+          <section className="home-extra-section home-travel-experiences" id="experiences" aria-labelledby="home-travel-experiences-title">
             <div className="home-extra-heading">
               <p className="booking-eyebrow">MAKE MEMORIES ALONG THE WAY</p>
               <h2 id="home-travel-experiences-title">Experiences you’ll remember</h2>
@@ -661,6 +955,30 @@ function BookingWebsite() {
             </div>
           </section>
 
+          <section className="home-extra-section home-travel-guides" id="travel-guides" aria-labelledby="home-travel-guides-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">NOTES FOR THE ROAD</p>
+              <h2 id="home-travel-guides-title">A little inspiration for the journey.</h2>
+              <p>Practical ideas to help you imagine a trip before you go.</p>
+            </div>
+            <div className="home-travel-guide-grid">
+              {travelGuides.map((guide) => (
+                <article className="home-travel-guide-card" key={guide.title}>
+                  <img src={guide.image} alt={`${guide.destination} travel inspiration`} />
+                  <div>
+                    <span>{guide.destination}</span>
+                    <h3>{guide.title}</h3>
+                    <p>{guide.description}</p>
+                    <details>
+                      <summary>Read guide <ArrowRight size={14} aria-hidden="true" /></summary>
+                      <p>{guide.guide}</p>
+                    </details>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
           <section className="home-extra-section home-agency-benefits" id="about" aria-labelledby="home-agency-benefits-title">
             <div className="home-extra-heading">
               <p className="booking-eyebrow">YOUR TRAVEL PARTNER</p>
@@ -678,13 +996,38 @@ function BookingWebsite() {
             </div>
           </section>
 
+          <section className="home-extra-section home-complete-trip" aria-labelledby="home-complete-trip-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">MORE THAN A PLACE TO STAY</p>
+              <h2 id="home-complete-trip-title">Why book a complete trip?</h2>
+              <p>Thoughtful planning connects the practical details with the moments you travel for.</p>
+            </div>
+            <div className="home-complete-trip-grid">
+              <article>
+                <span><Hotel size={20} aria-hidden="true" /></span>
+                <h3>One journey, considered together</h3>
+                <p>Bring stays, tours, experiences, and local transfers into one balanced itinerary.</p>
+              </article>
+              <article>
+                <span><Compass size={20} aria-hidden="true" /></span>
+                <h3>Room for your travel style</h3>
+                <p>Shape the days for a beach break, family holiday, cultural visit, or private trip.</p>
+              </article>
+              <article>
+                <span><LifeBuoy size={20} aria-hidden="true" /></span>
+                <h3>Help with the practical details</h3>
+                <p>Keep the important arrangements in view and know where to turn for travel guidance.</p>
+              </article>
+            </div>
+          </section>
+
           <section className="home-extra-cta" aria-labelledby="home-extra-cta-title">
             <div>
-              <p className="booking-eyebrow">YOUR NEXT CHAPTER</p>
-              <h2 id="home-extra-cta-title">Ready for your next adventure?</h2>
-              <p>Discover a new place and start imagining your next journey.</p>
+              <p className="booking-eyebrow">A JOURNEY THAT STARTS WITH YOU</p>
+              <h2 id="home-extra-cta-title">Don’t see the perfect package?</h2>
+              <p>Tell us how you want to travel and shape a journey around your plans.</p>
             </div>
-            <Link to="#destinations">Explore destinations <ArrowRight size={16} aria-hidden="true" /></Link>
+            <button type="button" onClick={focusTripPlanner}>Create my trip <ArrowRight size={16} aria-hidden="true" /></button>
           </section>
 
           <section className="home-extra-section home-seasonal-destinations" aria-labelledby="home-seasonal-destinations-title">
