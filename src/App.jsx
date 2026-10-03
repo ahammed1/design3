@@ -2,8 +2,6 @@ import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  BusFront,
-  CarFront,
   ChevronLeft,
   ChevronRight,
   Compass,
@@ -35,21 +33,6 @@ const footerPhotos = [
     label: "Open-road adventure",
     image:
       "https://images.unsplash.com/photo-1470770841072-f978cf4d019e?auto=format&fit=crop&w=700&q=80",
-  },
-  {
-    label: "Coastal hideaway",
-    image:
-      "https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=700&q=80",
-  },
-  {
-    label: "Alpine morning",
-    image:
-      "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=700&q=80",
-  },
-  {
-    label: "Desert horizons",
-    image:
-      "https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=700&q=80",
   },
   {
     label: "Old-town streets",
@@ -157,9 +140,20 @@ const popularDestinations = [
     image: "https://images.unsplash.com/photo-1525625293386-3f8f99389edd?auto=format&fit=crop&w=780&q=78",
   },
   {
+    city: "Delhi",
+    country: "India",
+    description: "Discover historic landmarks, colourful markets, and a celebrated food scene.",
+    bestFor: "Culture & food",
+    bestSeason: "October – March",
+    featuredExperience: "Old Delhi food walk",
+    packageAvailability: "Cultural city itineraries",
+    interests: ["Culture & heritage", "Family trips", "Adventure"],
+    image: "https://images.unsplash.com/photo-1587474260584-136574528ed5?auto=format&fit=crop&w=780&q=78",
+  },
+  {
     city: "Tokyo",
     country: "Japan",
-    description: "Find tranquil temples, lively neighbourhoods, and unforgettable food.",
+    description: "Move between tranquil temples, lively neighbourhoods, and memorable local food.",
     bestFor: "Culture & city breaks",
     bestSeason: "March – May",
     featuredExperience: "Neighbourhood food tour",
@@ -168,59 +162,15 @@ const popularDestinations = [
     image: "https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?auto=format&fit=crop&w=780&q=78",
   },
   {
-    city: "London",
-    country: "United Kingdom",
-    description: "Explore historic landmarks, leafy parks, and lively local streets.",
-    bestFor: "Family & culture",
-    bestSeason: "May – September",
-    featuredExperience: "Historic city walk",
-    packageAvailability: "Guided city breaks",
-    interests: ["Family trips", "Culture & heritage"],
-    image: "https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?auto=format&fit=crop&w=780&q=78",
-  },
-  {
-    city: "Bangkok",
-    country: "Thailand",
-    description: "Discover golden temples, floating markets, and vibrant street food.",
-    bestFor: "Culture & food",
-    bestSeason: "November – February",
-    featuredExperience: "Temple and market tour",
-    packageAvailability: "City and culture stays",
-    interests: ["Culture & heritage", "Adventure", "Family trips"],
-    image: "https://images.unsplash.com/photo-1508009603885-50cf7c579365?auto=format&fit=crop&w=780&q=78",
-  },
-  {
-    city: "Rome",
-    country: "Italy",
-    description: "Trace ancient history through piazzas, neighbourhoods, and local kitchens.",
-    bestFor: "History & food",
-    bestSeason: "April – June",
-    featuredExperience: "Historic centre walking tour",
-    packageAvailability: "Guided city breaks",
-    interests: ["Culture & heritage", "Family trips", "Honeymoon"],
-    image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?auto=format&fit=crop&w=780&q=78",
-  },
-  {
     city: "New York",
     country: "United States",
-    description: "Take in iconic skylines, world-class museums, and distinct local quarters.",
+    description: "Explore iconic city views, world-class museums, and distinctive neighbourhoods.",
     bestFor: "City & family breaks",
     bestSeason: "April – June",
     featuredExperience: "Neighbourhood discovery tour",
     packageAvailability: "City stays and guided tours",
     interests: ["Family trips", "Culture & heritage", "Luxury escapes"],
     image: "https://images.unsplash.com/photo-1518391846015-55a9cc003b25?auto=format&fit=crop&w=780&q=78",
-  },
-  {
-    city: "Cape Town",
-    country: "South Africa",
-    description: "Pair mountain views with coastal drives, markets, and ocean air.",
-    bestFor: "Adventure & culture",
-    bestSeason: "November – March",
-    featuredExperience: "Coastal peninsula day trip",
-    packageAvailability: "Coastal and adventure stays",
-    interests: ["Adventure", "Culture & heritage", "Family trips"],
-    image: "https://images.unsplash.com/photo-1580060839134-75a5edca2e99?auto=format&fit=crop&w=780&q=78",
   },
 ];
 
@@ -374,7 +324,7 @@ function BookingWebsite() {
   const destinationScroller = useRef(null);
   const tripPlannerRef = useRef(null);
   const [seasonalIndex, setSeasonalIndex] = useState(0);
-  const [selectedInterest, setSelectedInterest] = useState(travelInterests[0].label);
+  const [selectedInterest, setSelectedInterest] = useState("All packages");
   const [planner, setPlanner] = useState(defaultTripPlanner);
   const [travelerReviews, setTravelerReviews] = useState([]);
   const [reviewAuthor, setReviewAuthor] = useState("");
@@ -515,6 +465,77 @@ function BookingWebsite() {
             </button>
           </section>
 
+          <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
+            <div className="homepage-section-heading homepage-section-heading-row">
+              <div>
+                <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
+                <h2 id="travel-services-title">Make the whole trip yours.</h2>
+                <p>Bring together stays, local discoveries, and thoughtful support for every part of your journey.</p>
+              </div>
+              <Link className="homepage-text-link" to="#destinations">
+                Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
+              </Link>
+            </div>
+            <div className="homepage-service-grid homepage-service-grid-curated">
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Hotels & stays</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Hotels & stays</h3>
+                  <p>Find a comfortable base for every stop, from boutique hideaways to welcoming city hotels.</p>
+                  <a href="#popular-packages">Explore stay ideas <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
+              </article>
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><Compass size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Private tours</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Private tours</h3>
+                  <p>Explore with a local guide and a pace that suits the way you like to travel.</p>
+                  <a href="#experiences">Browse experiences <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
+              </article>
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><MapPin size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Local experiences</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Local experiences</h3>
+                  <p>Add food, culture, and memorable moments to your time in each destination.</p>
+                  <a href="#experiences">Explore experiences <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
+              </article>
+              <article className="homepage-service-card">
+                <div
+                  className="homepage-service-image"
+                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
+                >
+                  <span className="homepage-service-icon"><WandSparkles size={20} aria-hidden="true" /></span>
+                  <span className="homepage-service-status">Custom itineraries</span>
+                </div>
+                <div className="homepage-service-copy">
+                  <h3>Custom itineraries</h3>
+                  <p>Bring your ideas together with practical travel assistance along the way.</p>
+                  <a href="#home-trip-planner">Plan your trip <ArrowRight size={14} aria-hidden="true" /></a>
+                </div>
+              </article>
+            </div>
+          </section>
+
           <section className="home-extra-section home-popular-destinations" id="destinations" aria-labelledby="home-popular-destinations-title">
             <div className="home-extra-heading">
               <p className="booking-eyebrow">A PLACE TO BEGIN</p>
@@ -579,8 +600,27 @@ function BookingWebsite() {
               <h2 id="home-holiday-packages-title">Popular holiday packages</h2>
               <p>Thoughtfully planned stays to help make every day of your trip count.</p>
             </div>
+            <div className="home-interest-tabs" role="group" aria-label="Filter packages by travel interest">
+              {[
+                { label: "All packages", icon: Compass },
+                ...travelInterests,
+              ].map(({ label, icon: Icon }) => (
+                <button
+                  className={`home-interest-tab${selectedInterest === label ? " is-selected" : ""}`}
+                  key={label}
+                  type="button"
+                  aria-pressed={selectedInterest === label}
+                  onClick={() => setSelectedInterest(label)}
+                >
+                  <Icon size={17} aria-hidden="true" />
+                  {label}
+                </button>
+              ))}
+            </div>
             <div className="home-package-grid">
-              {holidayPackages.map((holiday) => (
+              {holidayPackages
+                .filter((holiday) => selectedInterest === "All packages" || holiday.interests.includes(selectedInterest))
+                .map((holiday) => (
                 <article className="home-package-card" key={holiday.name}>
                   <div
                     className="home-package-image"
@@ -608,6 +648,33 @@ function BookingWebsite() {
                         View package <ArrowRight size={14} aria-hidden="true" />
                       </button>
                     </div>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </section>
+
+          <section className="home-extra-section home-travel-experiences" id="experiences" aria-labelledby="home-travel-experiences-title">
+            <div className="home-extra-heading">
+              <p className="booking-eyebrow">MAKE MEMORIES ALONG THE WAY</p>
+              <h2 id="home-travel-experiences-title">Experiences you’ll remember</h2>
+              <p>Discover the moments, places, and local experiences that bring a trip to life.</p>
+            </div>
+            <div className="home-experience-grid">
+              {travelExperiences.map((experience) => (
+                <article className="home-experience-card" key={experience.name}>
+                  <div
+                    className="home-experience-image"
+                    style={{ backgroundImage: `linear-gradient(180deg, transparent 35%, rgba(10, 16, 22, 0.68)), url(${experience.image})` }}
+                    role="img"
+                    aria-label={experience.name}
+                  >
+                    <span><MapPin size={13} aria-hidden="true" />{experience.location}</span>
+                  </div>
+                  <div className="home-experience-copy">
+                    <h3>{experience.name}</h3>
+                    <p>{experience.description}</p>
+                    <a href="#home-trip-planner">Explore <ArrowRight size={14} aria-hidden="true" /></a>
                   </div>
                 </article>
               ))}
@@ -696,70 +763,6 @@ function BookingWebsite() {
             </div>
           </section>
 
-          <section className="home-extra-section home-travel-interests" id="travel-interests" aria-labelledby="home-travel-interests-title">
-            <div className="home-extra-heading">
-              <p className="booking-eyebrow">YOUR TRIP, YOUR WAY</p>
-              <h2 id="home-travel-interests-title">Travel your way</h2>
-              <p>Choose what inspires you to see matching holiday ideas.</p>
-            </div>
-            <div className="home-interest-tabs" role="group" aria-label="Filter trips by interest">
-              {travelInterests.map(({ label, icon: Icon }) => (
-                <button
-                  className={`home-interest-tab${selectedInterest === label ? " is-selected" : ""}`}
-                  key={label}
-                  type="button"
-                  aria-pressed={selectedInterest === label}
-                  onClick={() => setSelectedInterest(label)}
-                >
-                  <Icon size={17} aria-hidden="true" />
-                  {label}
-                </button>
-              ))}
-            </div>
-            <div className="home-interest-results" aria-live="polite">
-              <h3>{selectedInterest} ideas</h3>
-              <div className="home-interest-package-list">
-                {holidayPackages
-                  .filter((holiday) => holiday.interests.includes(selectedInterest))
-                  .map((holiday) => (
-                    <article className="home-interest-package" key={holiday.name}>
-                      <span><strong>{holiday.name}</strong><small>{holiday.destination} · {holiday.duration}</small></span>
-                      <a href="#home-holiday-packages-title" aria-label={`View ${holiday.name} package`}>
-                        View <ArrowRight size={14} aria-hidden="true" />
-                      </a>
-                    </article>
-                  ))}
-              </div>
-            </div>
-          </section>
-
-          <section className="home-extra-section home-travel-experiences" id="experiences" aria-labelledby="home-travel-experiences-title">
-            <div className="home-extra-heading">
-              <p className="booking-eyebrow">MAKE MEMORIES ALONG THE WAY</p>
-              <h2 id="home-travel-experiences-title">Experiences you’ll remember</h2>
-              <p>Discover the moments, places, and local experiences that bring a trip to life.</p>
-            </div>
-            <div className="home-experience-grid">
-              {travelExperiences.map((experience) => (
-                <article className="home-experience-card" key={experience.name}>
-                  <div
-                    className="home-experience-image"
-                    style={{ backgroundImage: `linear-gradient(180deg, transparent 35%, rgba(10, 16, 22, 0.68)), url(${experience.image})` }}
-                    role="img"
-                    aria-label={experience.name}
-                  >
-                    <span><MapPin size={13} aria-hidden="true" />{experience.location}</span>
-                  </div>
-                  <div className="home-experience-copy">
-                    <h3>{experience.name}</h3>
-                    <p>{experience.description}</p>
-                    <a href="#travel-interests">Explore <ArrowRight size={14} aria-hidden="true" /></a>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
           <section className="home-extra-section home-agency-benefits" id="about" aria-labelledby="home-agency-benefits-title">
             <div className="home-extra-heading">
               <p className="booking-eyebrow">YOUR TRAVEL PARTNER</p>
@@ -775,72 +778,6 @@ function BookingWebsite() {
                 </article>
               ))}
             </div>
-          </section>
-
-          <section className="homepage-travel-services" id="travel-services" aria-labelledby="travel-services-title">
-            <div className="homepage-section-heading homepage-section-heading-row">
-              <div>
-                <p className="booking-eyebrow">MORE FOR YOUR JOURNEY</p>
-                <h2 id="travel-services-title">Make the whole trip yours.</h2>
-                <p>Bring together the stays, local experiences, and practical details that make a trip feel complete.</p>
-              </div>
-              <Link className="homepage-text-link" to="#destinations">
-                Explore destinations <ArrowUpRight size={15} aria-hidden="true" />
-              </Link>
-            </div>
-            <div className="homepage-service-grid homepage-service-grid-curated">
-              <article className="homepage-service-card homepage-service-hotel">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.55)), url(https://images.unsplash.com/photo-1564501049412-61c2a3083791?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><Hotel size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Hotels & stays</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Hotels & stays</h3>
-                  <p>Find a comfortable base for every stop, from boutique hideaways to welcoming city hotels.</p>
-                  <a href="#popular-packages">Explore stay ideas <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-              <article className="homepage-service-card homepage-service-car">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, transparent 25%, rgba(15, 22, 29, 0.48)), url(https://images.unsplash.com/photo-1533473359331-0135ef1b58bf?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><CarFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Local mobility</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Explore at your own pace</h3>
-                  <p>Consider local car options for scenic road trips, day outings, and places beyond the city centre.</p>
-                  <a href="#home-trip-planner">Plan a journey <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-              <article className="homepage-service-card homepage-service-transfer">
-                <div
-                  className="homepage-service-image"
-                  style={{ backgroundImage: "linear-gradient(180deg, rgba(15, 22, 29, 0.08), rgba(15, 22, 29, 0.62)), url(https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=1000&q=85)" }}
-                >
-                  <span className="homepage-service-icon"><BusFront size={20} aria-hidden="true" /></span>
-                  <span className="homepage-service-status">Airport transfers</span>
-                </div>
-                <div className="homepage-service-copy">
-                  <h3>Airport transfers</h3>
-                  <p>Plan how you’ll get between the airport, your stay, and the places you want to explore.</p>
-                  <a href="#home-trip-planner">Add to your plans <ArrowRight size={14} aria-hidden="true" /></a>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section className="home-extra-cta" aria-labelledby="home-extra-cta-title">
-            <div>
-              <p className="booking-eyebrow">A JOURNEY THAT STARTS WITH YOU</p>
-              <h2 id="home-extra-cta-title">Don’t see the perfect package?</h2>
-              <p>Tell us how you want to travel and shape a journey around your plans.</p>
-            </div>
-            <button type="button" onClick={focusTripPlanner}>Create my trip <ArrowRight size={16} aria-hidden="true" /></button>
           </section>
 
           <section className="home-extra-section home-seasonal-destinations" aria-labelledby="home-seasonal-destinations-title">
@@ -992,6 +929,7 @@ function BookingWebsite() {
               </div>
             )}
           </section>
+
         </main>
 
         <div className="footer-gallery" aria-label="Travel and destination photos">
@@ -1012,6 +950,15 @@ function BookingWebsite() {
             ))}
           </div>
         </div>
+
+        <section className="home-extra-cta" aria-labelledby="home-extra-cta-title">
+          <div>
+            <p className="booking-eyebrow">A JOURNEY THAT STARTS WITH YOU</p>
+            <h2 id="home-extra-cta-title">Don’t see the perfect package?</h2>
+            <p>Tell us how you want to travel and shape a journey around your plans.</p>
+          </div>
+          <button type="button" onClick={focusTripPlanner}>Create my trip <ArrowRight size={16} aria-hidden="true" /></button>
+        </section>
 
         <footer className="site-footer">
           <div className="footer-cta">
@@ -1040,21 +987,21 @@ function BookingWebsite() {
               <h3>Explore</h3>
               <a href="#destinations">Top destinations</a>
               <a href="#destinations">Discover destinations</a>
-              <a href="#home">Travel inspiration</a>
+              <a href="#experiences">Travel inspiration</a>
             </nav>
 
             <nav className="footer-column" aria-label="Company">
               <h3>Company</h3>
               <a href="#about">About us</a>
               <a href="#destinations">Our destinations</a>
-              <a href="#destinations">Plan your journey</a>
+              <a href="#home-trip-planner">Plan your journey</a>
             </nav>
 
             <nav className="footer-column" aria-label="Travel help">
               <h3>Travel help</h3>
               <a href="#travel-services">Travel services</a>
-              <a href="#travel-services">Hotels and car rentals</a>
-              <a href="#travel-services">Airport transfers</a>
+              <a href="#travel-services">Hotels and stays</a>
+              <a href="#experiences">Private tours and local experiences</a>
               <a href="#home">Back to top</a>
             </nav>
           </div>
