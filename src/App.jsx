@@ -261,33 +261,6 @@ const defaultTripPlanner = {
   budget: "Flexible",
 };
 
-const travelExperiences = [
-  {
-    name: "Desert safari",
-    location: "Dubai",
-    description: "Take in golden dunes, wide-open skies, and an evening in the desert.",
-    image: "https://images.unsplash.com/photo-1473580044384-7ba9967e16a0?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "Island hopping",
-    location: "Thailand",
-    description: "Spend a day discovering clear-water coves and laid-back island life.",
-    image: "https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "Mountain trekking",
-    location: "Switzerland",
-    description: "Follow scenic trails through fresh alpine air and dramatic landscapes.",
-    image: "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    name: "Scuba diving",
-    location: "Maldives",
-    description: "Explore the colour and calm of a vibrant world beneath the water.",
-    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80",
-  },
-];
-
 const travelInterests = [
   { label: "Beach holidays", icon: Palmtree },
   { label: "Honeymoon", icon: Heart },
@@ -502,7 +475,7 @@ function BookingWebsite() {
                 <div className="homepage-service-copy">
                   <h3>Private tours</h3>
                   <p>Explore with a local guide and a pace that suits the way you like to travel.</p>
-                  <a href="#experiences">Browse experiences <ArrowRight size={14} aria-hidden="true" /></a>
+                  <a href="#home-trip-planner">Browse experiences <ArrowRight size={14} aria-hidden="true" /></a>
                 </div>
               </article>
               <article className="homepage-service-card">
@@ -516,7 +489,7 @@ function BookingWebsite() {
                 <div className="homepage-service-copy">
                   <h3>Local experiences</h3>
                   <p>Add food, culture, and memorable moments to your time in each destination.</p>
-                  <a href="#experiences">Explore experiences <ArrowRight size={14} aria-hidden="true" /></a>
+                  <a href="#home-trip-planner">Explore experiences <ArrowRight size={14} aria-hidden="true" /></a>
                 </div>
               </article>
               <article className="homepage-service-card">
@@ -648,33 +621,6 @@ function BookingWebsite() {
                         View package <ArrowRight size={14} aria-hidden="true" />
                       </button>
                     </div>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </section>
-
-          <section className="home-extra-section home-travel-experiences" id="experiences" aria-labelledby="home-travel-experiences-title">
-            <div className="home-extra-heading">
-              <p className="booking-eyebrow">MAKE MEMORIES ALONG THE WAY</p>
-              <h2 id="home-travel-experiences-title">Experiences you’ll remember</h2>
-              <p>Discover the moments, places, and local experiences that bring a trip to life.</p>
-            </div>
-            <div className="home-experience-grid">
-              {travelExperiences.map((experience) => (
-                <article className="home-experience-card" key={experience.name}>
-                  <div
-                    className="home-experience-image"
-                    style={{ backgroundImage: `linear-gradient(180deg, transparent 35%, rgba(10, 16, 22, 0.68)), url(${experience.image})` }}
-                    role="img"
-                    aria-label={experience.name}
-                  >
-                    <span><MapPin size={13} aria-hidden="true" />{experience.location}</span>
-                  </div>
-                  <div className="home-experience-copy">
-                    <h3>{experience.name}</h3>
-                    <p>{experience.description}</p>
-                    <a href="#home-trip-planner">Explore <ArrowRight size={14} aria-hidden="true" /></a>
                   </div>
                 </article>
               ))}
@@ -932,7 +878,7 @@ function BookingWebsite() {
 
         </main>
 
-        <div className="footer-gallery" aria-label="Travel and destination photos">
+        <div className="footer-gallery" id="travel-inspiration" aria-label="Travel and destination photos">
           <div className="footer-gallery-track">
             {[false, true].map((isDuplicate) => (
               <div
@@ -987,7 +933,7 @@ function BookingWebsite() {
               <h3>Explore</h3>
               <a href="#destinations">Top destinations</a>
               <a href="#destinations">Discover destinations</a>
-              <a href="#experiences">Travel inspiration</a>
+              <a href="#travel-inspiration">Travel inspiration</a>
             </nav>
 
             <nav className="footer-column" aria-label="Company">
@@ -1001,7 +947,7 @@ function BookingWebsite() {
               <h3>Travel help</h3>
               <a href="#travel-services">Travel services</a>
               <a href="#travel-services">Hotels and stays</a>
-              <a href="#experiences">Private tours and local experiences</a>
+              <a href="#travel-services">Private tours and local experiences</a>
               <a href="#home">Back to top</a>
             </nav>
           </div>

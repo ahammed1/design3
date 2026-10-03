@@ -6,7 +6,6 @@ const navItems = [
   { label: "Home", href: "#home" },
   { label: "Destinations", href: "#destinations" },
   { label: "Packages", href: "#popular-packages" },
-  { label: "Experiences", href: "#experiences" },
   { label: "Services", href: "#travel-services" },
   { label: "About", href: "#about" },
 ];
