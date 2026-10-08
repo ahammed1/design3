@@ -114,7 +114,7 @@ img {
   font-size: clamp(2.8rem, 7vw, 6rem);
   line-height: 0.92;
   letter-spacing: -0.08em;
-  font-weight: 500;
+  font-weight: 750;
   color: #121820;
 }
 
@@ -2354,10 +2354,39 @@ img {
   background-size: cover;
   color: #fff;
   text-decoration: none;
+  animation: destination-card-enter 700ms cubic-bezier(0.2, 0.75, 0.25, 1) backwards;
+}
+
+.home-destination-card:nth-child(2) {
+  animation-delay: 100ms;
+}
+
+.home-destination-card:nth-child(3) {
+  animation-delay: 200ms;
+}
+
+.home-destination-card:nth-child(4) {
+  animation-delay: 300ms;
+}
+
+.home-destination-card:nth-child(5) {
+  animation-delay: 400ms;
+}
+
+@keyframes destination-card-enter {
+  from {
+    opacity: 0;
+    transform: translateY(32px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .home-destination-card:hover {
-  transform: scale(1.015);
+  transform: translateY(-6px) scale(1.015);
 }
 
 .home-destination-country {
@@ -2730,6 +2759,10 @@ img {
 @media (prefers-reduced-motion: reduce) {
   .home-destination-marquee {
     scroll-behavior: auto;
+  }
+
+  .home-destination-card {
+    animation: none;
   }
 
   .home-destination-card,
@@ -3828,6 +3861,690 @@ img {
   .home-trip-planner-suggestion > button,
   .home-trip-planner-empty button,
   .home-extra-cta > button {
+    transition: none;
+  }
+}
+
+/* Editorial travel visual system */
+:root {
+  color-scheme: light;
+  --travel-ink: #17231f;
+  --travel-muted: #68746f;
+  --travel-line: rgba(31, 50, 42, 0.11);
+  --travel-paper: #f7f6f1;
+  --travel-green: #29483b;
+  --travel-shadow: 0 18px 45px rgba(28, 44, 36, 0.09);
+}
+
+html {
+  background: var(--travel-paper);
+}
+
+body {
+  background: var(--travel-paper);
+  color: var(--travel-ink);
+  font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: inherit;
+}
+
+.page-shell {
+  background: var(--travel-paper);
+}
+
+.content {
+  width: min(100%, 1600px);
+  margin-inline: auto;
+  padding: 0 clamp(18px, 4.1vw, 68px) 28px;
+}
+
+.hero {
+  min-height: 0;
+  padding: clamp(46px, 6.8vw, 94px) clamp(10px, 2vw, 28px) 36px;
+}
+
+.hero-copy {
+  max-width: 900px;
+  padding-top: 0;
+}
+
+.hero h1 {
+  color: var(--travel-ink);
+  font-size: clamp(3.3rem, 8.2vw, 7.6rem);
+  font-weight: 750;
+  letter-spacing: -0.085em;
+  line-height: 0.9;
+}
+
+.hero-description {
+  max-width: 520px;
+  margin: 22px auto 24px;
+  color: var(--travel-muted);
+  font-size: clamp(0.94rem, 1.25vw, 1.05rem);
+  line-height: 1.75;
+}
+
+.primary-btn,
+.navbar-cta,
+.home-extra-cta > button,
+.footer-cta-link {
+  background: var(--travel-green);
+  box-shadow: 0 8px 20px rgba(41, 72, 59, 0.16);
+  transition: transform 220ms ease, background 220ms ease, box-shadow 220ms ease;
+}
+
+.primary-btn:hover,
+.navbar-cta:hover,
+.home-extra-cta > button:hover,
+.footer-cta-link:hover {
+  transform: translateY(-2px);
+  background: #1e382d;
+  box-shadow: 0 12px 24px rgba(41, 72, 59, 0.2);
+}
+
+.plane-visual {
+  width: min(calc(100% + clamp(24px, 5vw, 80px)), 1360px);
+  min-height: 0;
+  margin: clamp(30px, 4vw, 52px) auto 0;
+  overflow: hidden;
+  border-radius: clamp(22px, 3vw, 38px);
+  box-shadow: var(--travel-shadow);
+}
+
+.plane-visual img {
+  height: clamp(260px, 42vw, 540px);
+  border-radius: inherit;
+  object-position: center 54%;
+  filter: saturate(0.88) contrast(1.02) brightness(0.94);
+  transform: scale(1.04);
+}
+
+.scroll-btn {
+  width: 54px;
+  height: 54px;
+  margin-top: 22px;
+  background: var(--travel-green);
+  box-shadow: 0 10px 24px rgba(41, 72, 59, 0.2);
+  transition: transform 220ms ease, box-shadow 220ms ease;
+}
+
+.scroll-btn:hover {
+  transform: translateY(3px);
+  box-shadow: 0 14px 28px rgba(41, 72, 59, 0.24);
+}
+
+.homepage-travel-services,
+.home-trending-routes,
+.home-travel-features,
+.home-trip-planner,
+.home-travel-tips,
+.home-popular-searches {
+  background: #eeefe8;
+}
+
+.homepage-travel-services {
+  margin-inline: calc(clamp(18px, 4.1vw, 68px) * -1);
+  padding: clamp(48px, 6vw, 78px) clamp(18px, 4.1vw, 68px);
+}
+
+.homepage-section-heading,
+.home-extra-heading {
+  max-width: 780px;
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+.homepage-section-heading h2,
+.home-extra-heading h2 {
+  color: var(--travel-ink);
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  font-weight: 650;
+  letter-spacing: -0.065em;
+  line-height: 1.02;
+}
+
+.homepage-section-heading > p:last-child,
+.home-extra-heading > p:last-child {
+  margin-top: 13px;
+  color: var(--travel-muted);
+  font-size: 0.94rem;
+  line-height: 1.7;
+}
+
+.booking-eyebrow {
+  margin-bottom: 10px;
+  color: #738077;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.19em;
+}
+
+.homepage-service-grid-curated,
+.home-package-grid {
+  gap: clamp(14px, 2vw, 24px);
+}
+
+.homepage-service-card,
+.home-package-card,
+.home-agency-benefit-card,
+.homepage-review-form,
+.homepage-review-card,
+.home-trip-planner-panel {
+  border-color: var(--travel-line);
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(28, 44, 36, 0.045);
+}
+
+.homepage-service-card,
+.home-package-card,
+.home-agency-benefit-card,
+.homepage-review-card {
+  transition: transform 300ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    box-shadow 300ms ease, border-color 300ms ease;
+}
+
+.homepage-service-card:hover,
+.home-package-card:hover,
+.home-agency-benefit-card:hover,
+.homepage-review-card:hover {
+  transform: translateY(-7px);
+  border-color: rgba(41, 72, 59, 0.22);
+  box-shadow: 0 20px 42px rgba(28, 44, 36, 0.13);
+}
+
+.homepage-service-image {
+  height: clamp(190px, 19vw, 250px);
+  flex-basis: clamp(190px, 19vw, 250px);
+}
+
+.homepage-service-copy {
+  padding: 20px 21px 23px;
+}
+
+.homepage-service-copy h3,
+.home-package-copy h3,
+.home-agency-benefit-card h3 {
+  color: var(--travel-ink);
+  font-size: 1rem;
+  letter-spacing: -0.025em;
+}
+
+.homepage-service-copy p,
+.home-package-description,
+.home-agency-benefit-card p {
+  color: var(--travel-muted);
+  font-size: 0.78rem;
+  line-height: 1.7;
+}
+
+.homepage-service-copy a,
+.home-package-price strong,
+.home-package-footer > button,
+.home-trip-planner-suggestion > button,
+.home-trip-planner-empty button {
+  color: var(--travel-green);
+}
+
+.home-extra-section {
+  padding: clamp(54px, 7vw, 92px) clamp(0px, 1vw, 16px);
+}
+
+.home-destination-card {
+  width: clamp(300px, 31vw, 420px);
+  min-height: clamp(390px, 39vw, 500px);
+  overflow: hidden;
+  border-radius: 24px;
+  box-shadow: 0 14px 36px rgba(18, 34, 27, 0.15);
+  background-position: center;
+  background-size: cover;
+  transition: transform 520ms cubic-bezier(0.2, 0.75, 0.25, 1),
+    box-shadow 400ms ease;
+}
+
+.home-destination-card:hover {
+  transform: translateY(-8px) scale(1.012);
+  box-shadow: 0 25px 48px rgba(18, 34, 27, 0.25);
+}
+
+.home-destination-country {
+  padding: 8px 12px;
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(17, 30, 25, 0.35);
+  font-size: 0.67rem;
+}
+
+.home-destination-copy h3 {
+  font-size: clamp(2rem, 3vw, 2.8rem);
+  letter-spacing: -0.055em;
+}
+
+.home-destination-copy p {
+  font-size: 0.9rem;
+}
+
+.home-destination-copy > a {
+  margin-top: 8px;
+}
+
+.home-destination-scroll-button {
+  width: 50px;
+  height: 50px;
+  border-color: rgba(255, 255, 255, 0.7);
+  color: var(--travel-green);
+  box-shadow: 0 10px 26px rgba(18, 34, 27, 0.18);
+}
+
+.home-destination-scroll-button:hover {
+  transform: translateY(-50%) scale(1.09);
+}
+
+.home-extra-cta {
+  margin: 28px 0 20px;
+  padding: clamp(28px, 5vw, 56px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  background: linear-gradient(125deg, #1d342b, #345a49);
+  box-shadow: 0 18px 42px rgba(28, 53, 41, 0.18);
+}
+
+.home-extra-cta h2 {
+  font-size: clamp(1.7rem, 3.5vw, 2.8rem);
+  font-weight: 650;
+  letter-spacing: -0.06em;
+}
+
+.home-extra-cta p:last-child {
+  font-size: 0.88rem;
+}
+
+.home-extra-cta > button {
+  flex-shrink: 0;
+  background: #f6f5ef;
+  color: var(--travel-green);
+}
+
+.home-extra-cta > button:hover {
+  background: #fff;
+  color: #1e382d;
+}
+
+.home-interest-tab {
+  min-height: 44px;
+  padding-inline: 17px;
+  border-color: var(--travel-line);
+  color: #56645d;
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease,
+    color 200ms ease, box-shadow 200ms ease;
+}
+
+.home-interest-tab:hover {
+  transform: translateY(-2px);
+  border-color: rgba(41, 72, 59, 0.35);
+}
+
+.home-interest-tab.is-selected {
+  border-color: var(--travel-green);
+  background: var(--travel-green);
+  box-shadow: 0 7px 16px rgba(41, 72, 59, 0.18);
+}
+
+.home-package-image {
+  aspect-ratio: 1.28;
+  transition: background-size 700ms ease;
+}
+
+.home-package-copy {
+  min-height: 330px;
+  padding: 20px;
+}
+
+.home-package-duration {
+  color: #74877b;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.home-package-footer > button,
+.home-trip-planner-suggestion > button,
+.home-trip-planner-empty button {
+  min-height: 40px;
+  padding-inline: 14px;
+  border-color: rgba(41, 72, 59, 0.18);
+  border-radius: 10px;
+  background: #f3f5f0;
+  transition: transform 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+
+.home-package-footer > button:hover,
+.home-trip-planner-suggestion > button:hover,
+.home-trip-planner-empty button:hover {
+  border-color: rgba(41, 72, 59, 0.38);
+  background: #e9eee7;
+}
+
+.home-trip-planner-panel {
+  max-width: 1180px;
+  padding: clamp(20px, 3vw, 34px);
+  box-shadow: var(--travel-shadow);
+}
+
+.home-trip-planner-fields label,
+.homepage-review-field > span {
+  color: #43534a;
+}
+
+.home-trip-planner-fields select,
+.homepage-review-field input,
+.homepage-review-field select,
+.homepage-review-field textarea {
+  min-height: 46px;
+  border-color: rgba(31, 50, 42, 0.14);
+  border-radius: 11px;
+  background: #fbfcf9;
+}
+
+.home-trip-planner-fields select:focus-visible,
+.homepage-review-field input:focus,
+.homepage-review-field select:focus,
+.homepage-review-field textarea:focus {
+  border-color: #789681;
+  box-shadow: 0 0 0 3px rgba(82, 125, 98, 0.14);
+}
+
+.home-trip-planner-suggestion {
+  border-color: var(--travel-line);
+  border-radius: 13px;
+  background: #fbfcf9;
+}
+
+.home-seasonal-carousel {
+  border-radius: 26px;
+  box-shadow: var(--travel-shadow);
+}
+
+.home-seasonal-banner {
+  min-height: clamp(440px, 52vw, 660px);
+  border-radius: inherit;
+}
+
+.home-seasonal-banner-content h3 {
+  font-weight: 700;
+}
+
+.home-seasonal-explore {
+  border-radius: 999px;
+  color: var(--travel-green);
+  box-shadow: 0 8px 22px rgba(10, 20, 15, 0.18);
+}
+
+.homepage-travel-services + .home-extra-section {
+  padding-top: clamp(58px, 7vw, 90px);
+}
+
+.homepage-testimonials {
+  padding: clamp(54px, 7vw, 90px) clamp(0px, 1vw, 16px);
+}
+
+.homepage-review-form {
+  max-width: 1000px;
+  margin: 0 auto 24px;
+  padding: clamp(20px, 3vw, 34px);
+}
+
+.homepage-review-card {
+  background: linear-gradient(145deg, #fff, #f4f6f0);
+}
+
+.footer-gallery {
+  padding-block: 28px;
+}
+
+.footer-photo {
+  border-radius: 20px;
+}
+
+.site-footer {
+  margin-top: 0;
+  padding-inline: max(clamp(18px, 4.1vw, 68px), calc((100vw - 1464px) / 2));
+  background: #16221d;
+}
+
+.footer-cta {
+  padding-block: clamp(30px, 4vw, 50px);
+}
+
+.footer-cta-link {
+  background: #f2f3ec;
+  color: #20382d;
+}
+
+.footer-cta-link:hover {
+  background: #fff;
+  color: #20382d;
+}
+
+.navbar {
+  position: sticky;
+  top: 0;
+  min-height: 78px;
+  padding-inline: max(clamp(18px, 4.1vw, 68px), calc((100vw - 1464px) / 2));
+  border-bottom-color: rgba(31, 50, 42, 0.08);
+  background: rgba(247, 246, 241, 0.88);
+  backdrop-filter: blur(18px);
+}
+
+.navbar-brand {
+  color: var(--travel-ink);
+  font-size: 1.18rem;
+}
+
+.navbar-brand-icon {
+  background: #e8ece3;
+  color: var(--travel-green);
+}
+
+.navbar-links a {
+  position: relative;
+  padding-block: 8px;
+  color: #5d6861;
+  font-size: 0.82rem;
+  transition: color 200ms ease;
+}
+
+.navbar-links a::after {
+  position: absolute;
+  right: 0;
+  bottom: 2px;
+  left: 0;
+  height: 1px;
+  background: currentColor;
+  content: "";
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 220ms ease;
+}
+
+.navbar-links a:hover::after,
+.navbar-links a:focus-visible::after {
+  transform: scaleX(1);
+}
+
+.navbar-cta {
+  min-height: 46px;
+  padding-inline: 22px;
+}
+
+.navbar-toggle {
+  border-color: var(--travel-line);
+  background: rgba(255, 255, 255, 0.76);
+}
+
+@media (max-width: 860px) {
+  .navbar-navigation {
+    border-color: var(--travel-line);
+    background: rgba(250, 250, 246, 0.98);
+    box-shadow: 0 18px 38px rgba(17, 33, 25, 0.14);
+  }
+}
+
+@media (max-width: 760px) {
+  .content {
+    padding-inline: 18px;
+  }
+
+  .hero {
+    padding-top: 54px;
+  }
+
+  .homepage-travel-services {
+    margin-inline: -18px;
+    padding-inline: 18px;
+  }
+
+  .home-extra-section,
+  .homepage-testimonials {
+    padding-block: 52px;
+  }
+
+  .home-destination-card {
+    width: min(78vw, 390px);
+    min-height: 420px;
+  }
+
+  .home-package-copy {
+    min-height: 0;
+  }
+
+  .home-extra-cta {
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 520px) {
+  .content {
+    padding-inline: 14px;
+  }
+
+  .hero {
+    padding: 42px 0 26px;
+  }
+
+  .hero-copy {
+    padding-inline: 3px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.65rem, 11.5vw, 3.8rem);
+    letter-spacing: -0.075em;
+    line-height: 0.94;
+  }
+
+  .hero-description {
+    margin-block: 18px 20px;
+    font-size: 0.9rem;
+  }
+
+  .plane-visual {
+    margin-top: 28px;
+  }
+
+  .plane-visual img {
+    height: clamp(210px, 58vw, 320px);
+  }
+
+  .homepage-travel-services {
+    margin-inline: -14px;
+    padding: 42px 14px;
+  }
+
+  .homepage-section-heading h2,
+  .home-extra-heading h2 {
+    font-size: clamp(1.9rem, 9vw, 2.65rem);
+  }
+
+  .homepage-service-card {
+    border-radius: 18px;
+  }
+
+  .home-extra-section,
+  .homepage-testimonials {
+    padding-block: 44px;
+  }
+
+  .home-destination-card {
+    width: min(84vw, 380px);
+    min-height: 390px;
+    padding: 15px;
+    border-radius: 21px;
+  }
+
+  .home-destination-scroll-button {
+    width: 40px;
+    height: 40px;
+  }
+
+  .home-extra-cta {
+    align-items: stretch;
+    padding: 24px 21px;
+    border-radius: 20px;
+  }
+
+  .home-extra-cta > button {
+    width: 100%;
+  }
+
+  .home-seasonal-carousel,
+  .home-seasonal-banner {
+    border-radius: 20px;
+  }
+
+  .home-seasonal-banner {
+    min-height: 480px;
+  }
+
+  .home-seasonal-banner-content {
+    padding: 24px 20px 105px;
+  }
+
+  .home-trip-planner-panel,
+  .homepage-review-form {
+    padding: 18px;
+    border-radius: 17px;
+  }
+
+  .homepage-review-submit-row {
+    gap: 14px;
+  }
+
+  .site-footer {
+    padding-inline: 18px;
+  }
+
+  .navbar {
+    min-height: 68px;
+    padding-inline: 16px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .primary-btn,
+  .navbar-cta,
+  .home-extra-cta > button,
+  .footer-cta-link,
+  .scroll-btn,
+  .homepage-service-card,
+  .home-package-card,
+  .home-agency-benefit-card,
+  .homepage-review-card,
+  .home-interest-tab,
+  .home-destination-card,
+  .navbar-links a::after {
     transition: none;
   }
 }
